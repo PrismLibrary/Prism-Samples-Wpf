@@ -4,6 +4,20 @@
         xmlns:prism="http://prismlibrary.com/"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="MainRegion" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentControl prism:RegionManager.RegionName="TopRegion" Margin="5" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" />
+        <ContentControl prism:RegionManager.RegionName="LeftRegion" Margin="5" Grid.Row="1" Grid.Column="0" />
+        <ContentControl prism:RegionManager.RegionName="MainRegion" Margin="5" Grid.Row="1" Grid.Column="1" />
+        <ContentControl prism:RegionManager.RegionName="RightRegion" Margin="5" Grid.Row="1" Grid.Column="2" />
+        <ContentControl prism:RegionManager.RegionName="BottomRegion" Margin="5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" />
     </Grid>
 </Window>
