@@ -15,7 +15,7 @@ namespace ModuleA
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion("MainRegion", typeof(ViewA));
+            _regionManager.RegisterViewWithRegion("TopRegion", typeof(ViewA));
         }
     }
 }
