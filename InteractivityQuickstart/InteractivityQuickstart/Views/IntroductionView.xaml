@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="InteractivityQuickstart.Views.IntroductionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="400">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="5" FontSize="24" Foreground="DarkBlue" TextWrapping="Wrap">Introduction</TextBlock>
+            <TextBlock Margin="5" TextWrapping="Wrap"> When developing a MVVM application there are two scenarios where you could need for the view and the view model to work together:</TextBlock>
+            <TextBlock Margin="15,5" TextWrapping="Wrap"> 1. The view model needs to interact with the user. However, as it should not manage the UI of the application directly it need to delegate this to the view.</TextBlock>
+            <TextBlock Margin="15,5" TextWrapping="Wrap"> 2. The user performs an action in the UI that raises an event. You need to delegate this to the view model as it's the one resposible for handling the logic in your application.</TextBlock>
+            <TextBlock Margin="5" TextWrapping="Wrap"> Those scenarios can be addressed using interactions and to help you with that Prism provides the <Bold>Prism.Interactivity</Bold> assembly.</TextBlock>
+            <TextBlock Margin="5,0" TextWrapping="Wrap"> The first case can be handled using <Bold>InteractionRequests</Bold> and <Bold>InteractionRequestTriggers</Bold>.</TextBlock>
+            <TextBlock Margin="5" TextWrapping="Wrap"> The second case can be handled using the <Bold>InvokeCommandAction</Bold>.
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

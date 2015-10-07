@@ -1,0 +1,28 @@
+﻿<Window x:Class="InteractivityQuickstart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:views="clr-namespace:InteractivityQuickstart.Views"
+        Title="Interactivity Quickstart" Height="480" Width="700">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Margin="5" FontSize="32" TextWrapping="Wrap">Interactivity Quickstart</TextBlock>
+
+        <TabControl AutomationProperties.AutomationId="InteractivityTabControl" Grid.Row="1">
+            <TabItem Header="Introduction">
+                <views:IntroductionView />
+            </TabItem>
+            <TabItem Header="Interaction Requests">
+                <views:InteractionRequestView />
+            </TabItem>
+            <TabItem Header="InvokeCommandAction">
+                <views:InvokeCommandActionView />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
