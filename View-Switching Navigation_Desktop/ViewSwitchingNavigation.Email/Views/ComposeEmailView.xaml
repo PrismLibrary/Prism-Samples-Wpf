@@ -1,0 +1,98 @@
+﻿<UserControl 
+    x:Class="ViewSwitchingNavigation.Email.Views.ComposeEmailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:prism="http://www.codeplex.com/prism" 
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400" >
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ConfirmExitDialogTemplate">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <ei:Interaction.Behaviors>
+            <i:DataStateBehavior Binding="{Binding SendState}" Value="Sending" TrueState="Sending" FalseState="Normal"/>
+        </ei:Interaction.Behaviors>
+        <ei:Interaction.Triggers>
+            <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmExitInteractionRequest}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </ei:Interaction.Triggers>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Sending">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="MainControl">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ContentControl x:Name="MainControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Bottom">To:</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EmailDocument.To}" Margin="0,5,0,0" AutomationProperties.AutomationId="ToTextBox"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Bottom">Subject:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EmailDocument.Subject}" Margin="0,5,0,0" AutomationProperties.AutomationId="SubjectTextBox"/>
+
+                <TextBox Text="{Binding EmailDocument.Text}" AcceptsReturn="True" MinHeight="100"
+                         Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto"
+                         Padding="0" Margin="0,5" AutomationProperties.AutomationId="EmailTextBox"/>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Command="{Binding SendEmailCommand}" Grid.Row="3" Grid.Column="1" Width="60" Margin="6,0">
+                        Send
+                    </Button>
+
+                    <Button Command="{Binding CancelEmailCommand}" Width="60">
+                        Cancel
+                    </Button>
+
+                    <controls:InfoTipToggleButton VerticalAlignment="Center">
+                        <controls:InfoTipToggleButton.Popup>
+                            <Popup>
+                                <Border BorderBrush="Black" BorderThickness="2">
+                                    <StackPanel MinWidth="100" MinHeight="24" MaxWidth="400" Background="White">
+                                        <TextBlock Margin="2" TextWrapping="Wrap">The Send button demonstrates navigating backwards in the regions journal, after sending the email.</TextBlock>
+                                        <TextBlock Margin="2" TextWrapping="Wrap">The Cancel button demonstrates the ability to cancel a navigation request after asking the user if they're sure they want to discard their changes.</TextBlock>
+                                        <TextBlock Margin="2" TextWrapping="Wrap">Both of these can be seen in the ComposeEmailViewModel's implementation.</TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </controls:InfoTipToggleButton.Popup>
+                    </controls:InfoTipToggleButton>
+                </StackPanel>
+
+            </Grid>
+        </ContentControl>
+    </Grid>
+</UserControl>

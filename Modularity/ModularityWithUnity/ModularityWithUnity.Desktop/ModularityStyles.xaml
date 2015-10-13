@@ -1,0 +1,85 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:ModularityWithUnity="clr-namespace:ModularityWithUnity.Desktop">
+
+    <SolidColorBrush x:Key="ModuleControl.NotStarted.BackgroundBrush-Simple" Color="White"/>
+    <SolidColorBrush x:Key="ModuleControl.NotStarted.BorderBrush-Simple" Color="Gray"/>
+    <SolidColorBrush x:Key="ModuleControl.NotStarted.ForegroundBrush-Simple" Color="Gray"/>
+
+    <SolidColorBrush x:Key="ModuleControl.Downloading.BackgroundBrush-Simple" Color="White"/>
+    <SolidColorBrush x:Key="ModuleControl.Downloading.BorderBrush-Simple" Color="LightBlue"/>
+    <SolidColorBrush x:Key="ModuleControl.Downloading.ForegroundBrush-Simple" Color="Black"/>
+
+    <LinearGradientBrush x:Key="ModuleControl.Downloaded.BackgroundBrush-Simple" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0.02"/>
+        <GradientStop Color="LightBlue" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ModuleControl.Downloaded.BorderBrush-Simple" Color="LightBlue"/>
+    <SolidColorBrush x:Key="ModuleControl.Downloaded.ForegroundBrush-Simple" Color="Black"/>
+
+    <SolidColorBrush x:Key="ModuleControl.Constructed.BackgroundBrush-Simple" Color="White"/>
+    <SolidColorBrush x:Key="ModuleControl.Constructed.BorderBrush-Simple" Color="Black"/>
+    <SolidColorBrush x:Key="ModuleControl.Constructed.ForegroundBrush-Simple" Color="Black"/>
+
+    <LinearGradientBrush x:Key="ModuleControl.Initialized.BackgroundBrush-Simple" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFBCE4A5" Offset="0.02"/>
+        <GradientStop Color="#FF579D2F" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ModuleControl.Initialized.BorderBrush-Simple" Color="#FF36621D"/>
+    <SolidColorBrush x:Key="ModuleControl.Initialized.ForegroundBrush-Simple" Color="Black"/>
+
+    <ControlTemplate x:Key="ModuleControlTemplate-Simple" TargetType="ModularityWithUnity:ModuleControl">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <i:Interaction.Triggers>
+                <!-- DataTriggers only work when the dependency property value changes. -->
+                <!-- For the quickstart, some modules may initialize before the UI data-binds. -->
+                <!-- To accomodate this, the data triggers below bind to a hidden control value that is bound late enough. -->
+                <ei:DataTrigger Binding="{Binding ElementName=ModuleStatusTextBlock, Path=Text}" Value="NotStarted">
+                    <ei:ChangePropertyAction PropertyName="Background" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.NotStarted.BackgroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="Foreground" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.NotStarted.ForegroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="BorderBrush" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.NotStarted.BorderBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="FontSize" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="12"/>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding ElementName=ModuleStatusTextBlock, Path=Text}" Value="Downloading">
+                    <ei:ChangePropertyAction PropertyName="Background" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}"  Value="{StaticResource ModuleControl.Downloading.BackgroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="Foreground" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Downloading.ForegroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="BorderBrush" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Downloading.BorderBrush-Simple}"/>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding ElementName=ModuleStatusTextBlock, Path=Text}" Value="Downloaded">
+                    <ei:ChangePropertyAction PropertyName="Background" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}"  Value="{StaticResource ModuleControl.Downloaded.BackgroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="Foreground" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Downloaded.ForegroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="BorderBrush" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Downloaded.BorderBrush-Simple}"/>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding ElementName=ModuleStatusTextBlock, Path=Text}" Value="Constructed">
+                    <ei:ChangePropertyAction PropertyName="Background" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Constructed.BackgroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="Foreground" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Constructed.ForegroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="BorderBrush" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Constructed.BorderBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="FontSize" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="12"/>
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding ElementName=ModuleStatusTextBlock, Path=Text}" Value="Initialized">
+                    <ei:ChangePropertyAction PropertyName="Background" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}"  Value="{StaticResource ModuleControl.Initialized.BackgroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="Foreground" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Initialized.ForegroundBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="BorderBrush" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="{StaticResource ModuleControl.Initialized.BorderBrush-Simple}"/>
+                    <ei:ChangePropertyAction PropertyName="FontSize" TargetObject="{Binding RelativeSource={RelativeSource TemplatedParent}}" Value="15"/>
+                </ei:DataTrigger>
+            </i:Interaction.Triggers>
+            <Grid>
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RenderTransformOrigin="0.5,0.5" />
+                <!-- This must come after the DataTriggers so that it is bound later and causes the triggers to fire and grab initial state -->
+                <TextBlock Visibility="Collapsed" x:Name="ModuleStatusTextBlock" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.ModuleInitializationStatus}" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="ModuleControlStyle-Simple" TargetType="ModularityWithUnity:ModuleControl">
+        <Setter Property="Background" Value="{StaticResource ModuleControl.NotStarted.BackgroundBrush-Simple}"/>
+        <Setter Property="Foreground" Value="{StaticResource ModuleControl.NotStarted.ForegroundBrush-Simple}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ModuleControl.NotStarted.BorderBrush-Simple}"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template" Value="{StaticResource ModuleControlTemplate-Simple}"/>
+    </Style>
+
+</ResourceDictionary>
