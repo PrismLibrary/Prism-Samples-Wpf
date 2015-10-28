@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="ModularityWithMef.Desktop.ModuleControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"         
+	mc:Ignorable="d"		
+	UseLayoutRounding="True"
+	d:DesignWidth="100" d:DesignHeight="100"
+    Loaded="ModuleControl_Loaded"    >
+    <!-- This control binds against ModuleTrackingState -->
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" 
+                           Text="{Binding ModuleName, FallbackValue=Unknown}" 
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <!-- This will show up if module is loadable on demand -->
+                <TextBlock x:Name="ClickToLoadTextBlock" 
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Text="(Click to load)" Grid.Row="1" Foreground="#FFDE8310" Visibility="Collapsed" FontSize="9.667"/>
+                <!-- This will show up while the module is loading -->
+                <Grid Grid.Row="2" x:Name="LoadProgressPanel" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Value="{Binding DownloadProgressPercentage, Mode=OneWay}" Maximum="100" Margin="2" Height="10" />
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap"                    
+                           Text="{Binding DownloadProgressPercentage, Mode=OneWay}"
+                            FontSize="9.667"/>
+                        <TextBlock Text="%" FontSize="9.667"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+    <!-- This tooltip helps users see additional information about the module -->
+    <ToolTipService.ToolTip >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Status: " />
+            <TextBlock Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" Text="{Binding ModuleInitializationStatus, FallbackValue=Unknown}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Discovery: " />
+            <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding ExpectedDiscoveryMethod, FallbackValue=Unknown}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Initialized: " />
+            <TextBlock Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ExpectedInitializationMode, FallbackValue=Unknown}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Downloaded: " />
+            <TextBlock Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="{Binding ExpectedDownloadTiming, FallbackValue=Unknown}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Depends On: " />
+            <TextBlock Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="{Binding ConfiguredDependencies, FallbackValue=Unknown}" />
+        </Grid>
+    </ToolTipService.ToolTip>
+</UserControl>
