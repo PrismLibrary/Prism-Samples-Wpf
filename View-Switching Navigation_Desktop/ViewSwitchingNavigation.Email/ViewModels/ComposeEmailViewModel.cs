@@ -1,5 +1,3 @@
-
-
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
@@ -193,45 +191,39 @@ namespace ViewSwitchingNavigation.Email.ViewModels
 
             var parameters = navigationContext.Parameters;
 
-            if (parameters.ContainsKey(ReplyToParameterKey))
+            var replyTo = parameters[ReplyToParameterKey];
+            Guid replyToId;
+            if (replyTo != null)
             {
-                var replyTo = parameters[ReplyToParameterKey];
-                if (replyTo != null)
+                if (replyTo is Guid)
                 {
-                    Guid replyToId;
-                    if (replyTo is Guid)
-                    {
-                        replyToId = (Guid)replyTo;
-                    }
-                    else
-                    {
-                        replyToId = Guid.Parse(replyTo.ToString());
-                    }
+                    replyToId = (Guid)replyTo;
+                }
+                else 
+                {
+                    replyToId = Guid.Parse(replyTo.ToString());
+                }
 
-                    var replyToEmail = this.emailService.GetEmailDocument(replyToId);
-                    if (replyToEmail != null)
-                    {
-                        emailDocument.To = replyToEmail.From;
-                        emailDocument.Subject = Resources.ResponseMessagePrefix + replyToEmail.Subject;
+                var replyToEmail = this.emailService.GetEmailDocument(replyToId);
+                if (replyToEmail != null)
+                {
+                    emailDocument.To = replyToEmail.From;
+                    emailDocument.Subject = Resources.ResponseMessagePrefix + replyToEmail.Subject;
 
-                        emailDocument.Text =
-                            Environment.NewLine +
-                            replyToEmail.Text
-                                .Split(Environment.NewLine.ToCharArray())
-                                .Select(l => l.Length > 0 ? Resources.ResponseLinePrefix + l : l)
-                                .Aggregate((l1, l2) => l1 + Environment.NewLine + l2);
-                    }
+                    emailDocument.Text =
+                        Environment.NewLine +
+                        replyToEmail.Text
+                            .Split(Environment.NewLine.ToCharArray())
+                            .Select(l => l.Length > 0 ? Resources.ResponseLinePrefix + l : l)
+                            .Aggregate((l1, l2) => l1 + Environment.NewLine + l2);
                 }
             }
             else
             {
-                if (parameters.ContainsKey(ToParameterKey))
+                var to = parameters[ToParameterKey];
+                if (to != null)
                 {
-                    var to = parameters[ToParameterKey];
-                    if (to != null)
-                    {
-                        emailDocument.To = to.ToString();
-                    }
+                    emailDocument.To = to.ToString();
                 }
             }
 
