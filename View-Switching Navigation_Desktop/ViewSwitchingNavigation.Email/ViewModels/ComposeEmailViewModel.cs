@@ -27,11 +27,10 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         private const string NormalStateKey = "Normal";
         private const string SendingStateKey = "Sending";
         private const string SentStateKey = "Sent";
-        
+
         private const string ReplyToParameterKey = "ReplyTo";
         private const string ToParameterKey = "To";
 
-        private readonly SynchronizationContext synchronizationContext;
         private readonly IEmailService emailService;
         private readonly DelegateCommand sendEmailCommand;
         private readonly DelegateCommand cancelEmailCommand;
@@ -43,7 +42,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         [ImportingConstructor]
         public ComposeEmailViewModel(IEmailService emailService)
         {
-            this.synchronizationContext = SynchronizationContext.Current ?? new SynchronizationContext();
             this.sendEmailCommand = new DelegateCommand(this.SendEmail);
             this.cancelEmailCommand = new DelegateCommand(this.CancelEmail);
             this.confirmExitInteractionRequest = new InteractionRequest<Confirmation>();
@@ -93,29 +91,21 @@ namespace ViewSwitchingNavigation.Email.ViewModels
             }
         }
 
-        private void SendEmail()
+        private async void SendEmail()
         {
             this.SendState = SendingStateKey;
-            this.emailService.BeginSendEmailDocument(
-                this.emailDocument,
-                r => this.synchronizationContext.Post(
-                    s =>
-                        {
-                            this.SendState = SentStateKey;
+            await this.emailService.SendEmailDocumentAsync(this.emailDocument);
+            this.SendState = SentStateKey;
 
-                            // todo: 05 - Send Email: Navigating back
-                            // After the email has been 'sent' (we're using a mock mail service 
-                            // in this application), the view model uses the navigation journal 
-                            // it captured when it was navigated to (see the OnNavigatedTo in 
-                            // this class) to navigate the region to the prior view.  
-                            if (this.navigationJournal != null)
-                            {
-                                this.navigationJournal.GoBack();
-                            }
-                        },
-                    null),
-                null);
-
+            // todo: 05 - Send Email: Navigating back
+            // After the email has been 'sent' (we're using a mock mail service 
+            // in this application), the view model uses the navigation journal 
+            // it captured when it was navigated to (see the OnNavigatedTo in 
+            // this class) to navigate the region to the prior view.  
+            if (this.navigationJournal != null)
+            {
+                this.navigationJournal.GoBack();
+            }
         }
 
         private void CancelEmail()
@@ -199,7 +189,7 @@ namespace ViewSwitchingNavigation.Email.ViewModels
                 {
                     replyToId = (Guid)replyTo;
                 }
-                else 
+                else
                 {
                     replyToId = Guid.Parse(replyTo.ToString());
                 }

@@ -1,13 +1,13 @@
-
-
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using ViewSwitchingNavigation.Email.Model;
@@ -23,7 +23,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         private const string EmailViewKey = "EmailView";
         private const string EmailIdKey = "EmailId";
 
-        private readonly SynchronizationContext synchronizationContext;
         private readonly IEmailService emailService;
         private readonly IRegionManager regionManager;
         private readonly DelegateCommand<object> composeMessageCommand;
@@ -36,8 +35,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         [ImportingConstructor]
         public InboxViewModel(IEmailService emailService, IRegionManager regionManager)
         {
-            this.synchronizationContext = SynchronizationContext.Current ?? new SynchronizationContext();
-
             this.composeMessageCommand = new DelegateCommand<object>(this.ComposeMessage);
             this.replyMessageCommand = new DelegateCommand<object>(this.ReplyMessage, this.CanReplyMessage);
             this.openMessageCommand = new DelegateCommand<EmailDocument>(this.OpenMessage);
@@ -50,22 +47,13 @@ namespace ViewSwitchingNavigation.Email.ViewModels
             this.emailService = emailService;
             this.regionManager = regionManager;
 
-            this.emailService.BeginGetEmailDocuments(
-                r =>
-                {
-                    var messages = this.emailService.EndGetEmailDocuments(r);
+            var task = this.Initialize();
+        }
 
-                    this.synchronizationContext.Post(
-                        s =>
-                        {
-                            foreach (var message in messages)
-                            {
-                                this.messagesCollection.Add(message);
-                            }
-                        },
-                        null);
-                },
-                null);
+        private async Task Initialize()
+        {
+            var messages = await this.emailService.GetEmailDocumentsAsync();
+            messages.ToList().ForEach(m => this.messagesCollection.Add(m));
         }
 
         public ICollectionView Messages { get; private set; }

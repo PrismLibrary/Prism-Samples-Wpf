@@ -9,6 +9,7 @@ using Moq;
 using ViewSwitchingNavigation.Email.Model;
 using ViewSwitchingNavigation.Email.ViewModels;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ViewSwitchingNavigation.Email.Tests
 {
@@ -16,7 +17,7 @@ namespace ViewSwitchingNavigation.Email.Tests
     public class ComposeEmailViewModelFixture
     {
         [TestMethod]
-        public void WhenSendMessageCommandIsExecuted_ThenSendsMessageThroughService()
+        public async void WhenSendMessageCommandIsExecuted_ThenSendsMessageThroughService()
         {
             var emailServiceMock = new Mock<IEmailService>();
 
@@ -24,10 +25,10 @@ namespace ViewSwitchingNavigation.Email.Tests
             ((INavigationAware)viewModel).OnNavigatedTo(new NavigationContext(new Mock<IRegionNavigationService>().Object, new Uri("", UriKind.Relative)));
 
             viewModel.SendEmailCommand.Execute(null);
-
+            await Task.Delay(500);
             Assert.AreEqual("Sending", viewModel.SendState);
 
-            emailServiceMock.Verify(svc => svc.BeginSendEmailDocument(viewModel.EmailDocument, It.IsAny<AsyncCallback>(), null));
+            emailServiceMock.Verify(svc => svc.SendEmailDocumentAsync(viewModel.EmailDocument));
         }
 
         [TestMethod]
@@ -75,14 +76,9 @@ namespace ViewSwitchingNavigation.Email.Tests
             var sendEmailResultMock = new Mock<IAsyncResult>();
 
             var emailServiceMock = new Mock<IEmailService>();
-            AsyncCallback callback = null;
             emailServiceMock
-                .Setup(svc => svc.BeginSendEmailDocument(It.IsAny<EmailDocument>(), It.IsAny<AsyncCallback>(), null))
-                .Callback<EmailDocument, AsyncCallback, object>((e, c, o) => { callback = c; })
-                .Returns(sendEmailResultMock.Object);
-            emailServiceMock
-                .Setup(svc => svc.EndSendEmailDocument(sendEmailResultMock.Object))
-                .Verifiable();
+                .Setup(svc => svc.SendEmailDocumentAsync(It.IsAny<EmailDocument>()))
+                .Returns(Task.FromResult<object>(null));
 
             var journalMock = new Mock<IRegionNavigationJournal>();
             journalMock.Setup(j => j.GoBack()).Verifiable();
@@ -94,8 +90,6 @@ namespace ViewSwitchingNavigation.Email.Tests
             ((INavigationAware)viewModel).OnNavigatedTo(new NavigationContext(navigationServiceMock.Object, new Uri("", UriKind.Relative)));
 
             viewModel.SendEmailCommand.Execute(null);
-
-            callback(sendEmailResultMock.Object);
 
             // The action is performed asynchronously in the view model, so we need to wait until it's completed.
             Thread.Sleep(500);

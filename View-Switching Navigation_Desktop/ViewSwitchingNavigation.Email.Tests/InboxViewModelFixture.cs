@@ -11,6 +11,7 @@ using ViewSwitchingNavigation.Email.ViewModels;
 using ViewSwitchingNavigation.Infrastructure;
 using System.Threading;
 using System.Windows.Data;
+using System.Threading.Tasks;
 
 namespace ViewSwitchingNavigation.Email.Tests
 {
@@ -23,7 +24,7 @@ namespace ViewSwitchingNavigation.Email.Tests
             var emailServiceMock = new Mock<IEmailService>();
             var requested = false;
             emailServiceMock
-                .Setup(svc => svc.BeginGetEmailDocuments(It.IsAny<AsyncCallback>(), null))
+                .Setup(svc => svc.GetEmailDocumentsAsync())
                 .Callback(() => requested = true);
 
             var viewModel = new InboxViewModel(emailServiceMock.Object, new Mock<IRegionManager>().Object);
@@ -51,23 +52,19 @@ namespace ViewSwitchingNavigation.Email.Tests
         public void WhenExecutingTheReplyCommand_ThenNavigatesToComposeEmailViewWithId()
         {
             var email = new EmailDocument();
+            EmailDocument[] emails = new EmailDocument[] { email };
 
             var emailServiceMock = new Mock<IEmailService>();
             AsyncCallback callback = null;
             var asyncResultMock = new Mock<IAsyncResult>();
             emailServiceMock
-                .Setup(svc => svc.BeginGetEmailDocuments(It.IsAny<AsyncCallback>(), null))
-                .Callback<AsyncCallback, object>((ac, o) => callback = ac)
-                .Returns(asyncResultMock.Object);
-            emailServiceMock
-                .Setup(svc => svc.EndGetEmailDocuments(asyncResultMock.Object))
-                .Returns(new[] { email });
+                .Setup(svc => svc.GetEmailDocumentsAsync())
+                .Returns(Task.FromResult(emails.AsEnumerable()));
 
             Mock<IRegionManager> regionManagerMock = new Mock<IRegionManager>();
             regionManagerMock.Setup(x => x.RequestNavigate(RegionNames.MainContentRegion, @"ComposeEmailView?ReplyTo=" + email.Id.ToString("N")))
                 .Verifiable();
 
-            EmailDocument[] emails = new EmailDocument[]{ email };
             var viewModel = new TestInboxViewModel(emailServiceMock.Object, regionManagerMock.Object, emails);
 
             Assert.IsFalse(viewModel.Messages.IsEmpty);
