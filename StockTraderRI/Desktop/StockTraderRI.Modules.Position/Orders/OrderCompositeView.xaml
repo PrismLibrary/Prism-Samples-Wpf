@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.Position.Orders.OrderCompositeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:orders="clr-namespace:StockTraderRI.Modules.Position.Orders">
+    <Border Padding="5,5,5,5" BorderBrush="#77000000" BorderThickness="1,1,1,1" Margin="0,0,0,5" CornerRadius="12,12,12,12" Width="Auto">
+        <StackPanel HorizontalAlignment="Stretch" Width="Auto">
+            <Expander x:Name="CompositeExpander" IsExpanded="True" Header="{Binding OrderDetails}" Content="{Binding OrderDetails}">
+                <Expander.ContentTemplate>
+                    <DataTemplate>
+                        <orders:OrderDetailsView/>
+                    </DataTemplate>
+                </Expander.ContentTemplate>
+                <Expander.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" x:Name="StockHeader" Margin="0,5,0,0" Style="{StaticResource TextBlockSectionTitle}" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Expander}},Path=DataContext.HeaderInfo}"/>
+                            <orders:OrderCommandsView Grid.Column="1" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </DataTemplate>
+                </Expander.HeaderTemplate>
+            </Expander>
+            <Rectangle Margin="0,5,0,0" Stroke="{x:Null}" RadiusX="0" RadiusY="0" VerticalAlignment="Bottom" Height="4" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                        <SkewTransform AngleX="0" AngleY="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </StackPanel>
+    </Border>
+</UserControl>

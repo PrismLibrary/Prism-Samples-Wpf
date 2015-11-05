@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.Position.PositionSummary.PositionPieChartView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chartControls="clr-namespace:StockTraderRI.ChartControls;assembly=StockTraderRI.ChartControls"
+    Height="170">
+    <UserControl.Resources>
+        <!-- By convention every view inside the ResearchControl (ResearchRegion) has to declare 
+             a DataTemplate with the "HeaderIcon" key which defines the icon on the Header -->
+        <DataTemplate x:Key="HeaderIcon">
+            <Grid Margin="15,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="15.031" Height="15.055">
+                <Ellipse Margin="0,0,0.031,0.055" Fill="{x:Null}" Stroke="#FFFFFFFF" StrokeThickness="2"/>
+                <Path Margin="6.531,6.43,0,0" Fill="{x:Null}" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="2" Data="M66.625,440 L60.125,440 60.125,446.625"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Border BorderThickness="0,0,0,1" BorderBrush="#FFFFFFFF" Padding="10,10,10,10">
+        <StackPanel>
+            <TextBlock Text="PIE CHART" Style="{StaticResource TextBlockSectionTitle}" AutomationProperties.AutomationId="PieChartTextBlock"  />
+            <chartControls:PieChart x:Name="pieChart" Grid.Row="1" ItemsSource="{Binding Path=Position.Items}" ValuePath="MarketValue" LabelPath="TickerSymbol" Title="" />
+        </StackPanel>
+    </Border>
+</UserControl>

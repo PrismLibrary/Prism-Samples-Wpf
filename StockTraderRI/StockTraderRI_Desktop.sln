@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_StockTraderRI Common", "_StockTraderRI Common", "{AA6791F0-2989-4626-8981-F8935F6D501E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0A8F9AA8-7336-4DA1-8C98-D91A6730AA0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI", "Desktop\StockTraderRI\StockTraderRI.csproj", "{3487B9D4-AFAB-4E82-A0F6-2BEE3C013BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.Infrastructure", "Desktop\StockTraderRI.Infrastructure\StockTraderRI.Infrastructure.csproj", "{0A123C1B-F316-447D-99A5-44CCF8023683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.Modules.Market", "Desktop\StockTraderRI.Modules.Market\StockTraderRI.Modules.Market.csproj", "{65E5631B-965B-4E16-9B98-6DCAE79B0D85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.Modules.News", "Desktop\StockTraderRI.Modules.News\StockTraderRI.Modules.News.csproj", "{2B892495-7440-44D4-87F7-C7ABB42740A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.Modules.Position", "Desktop\StockTraderRI.Modules.Position\StockTraderRI.Modules.Position.csproj", "{46F2DA52-ACB0-4183-912F-7CC29971ED50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.Modules.Watch", "Desktop\StockTraderRI.Modules.WatchList\StockTraderRI.Modules.Watch.csproj", "{78621307-C67F-4C61-96AA-7EE4B3C08620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraderRI.ChartControls", "ChartControls\StockTraderRI.ChartControls.csproj", "{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3487B9D4-AFAB-4E82-A0F6-2BEE3C013BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3487B9D4-AFAB-4E82-A0F6-2BEE3C013BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3487B9D4-AFAB-4E82-A0F6-2BEE3C013BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3487B9D4-AFAB-4E82-A0F6-2BEE3C013BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A123C1B-F316-447D-99A5-44CCF8023683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A123C1B-F316-447D-99A5-44CCF8023683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A123C1B-F316-447D-99A5-44CCF8023683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A123C1B-F316-447D-99A5-44CCF8023683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E5631B-965B-4E16-9B98-6DCAE79B0D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E5631B-965B-4E16-9B98-6DCAE79B0D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E5631B-965B-4E16-9B98-6DCAE79B0D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E5631B-965B-4E16-9B98-6DCAE79B0D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B892495-7440-44D4-87F7-C7ABB42740A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B892495-7440-44D4-87F7-C7ABB42740A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B892495-7440-44D4-87F7-C7ABB42740A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B892495-7440-44D4-87F7-C7ABB42740A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F2DA52-ACB0-4183-912F-7CC29971ED50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F2DA52-ACB0-4183-912F-7CC29971ED50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F2DA52-ACB0-4183-912F-7CC29971ED50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F2DA52-ACB0-4183-912F-7CC29971ED50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78621307-C67F-4C61-96AA-7EE4B3C08620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78621307-C67F-4C61-96AA-7EE4B3C08620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78621307-C67F-4C61-96AA-7EE4B3C08620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78621307-C67F-4C61-96AA-7EE4B3C08620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A123C1B-F316-447D-99A5-44CCF8023683} = {AA6791F0-2989-4626-8981-F8935F6D501E}
+		{65E5631B-965B-4E16-9B98-6DCAE79B0D85} = {0A8F9AA8-7336-4DA1-8C98-D91A6730AA0E}
+		{2B892495-7440-44D4-87F7-C7ABB42740A8} = {0A8F9AA8-7336-4DA1-8C98-D91A6730AA0E}
+		{46F2DA52-ACB0-4183-912F-7CC29971ED50} = {0A8F9AA8-7336-4DA1-8C98-D91A6730AA0E}
+		{78621307-C67F-4C61-96AA-7EE4B3C08620} = {0A8F9AA8-7336-4DA1-8C98-D91A6730AA0E}
+		{CBF8605C-8DAC-4CBB-9A1E-D798D83B277E} = {AA6791F0-2989-4626-8981-F8935F6D501E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

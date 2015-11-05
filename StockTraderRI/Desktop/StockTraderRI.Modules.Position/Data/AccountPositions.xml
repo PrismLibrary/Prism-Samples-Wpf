@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAccountPosition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AccountPosition>
+    <TickerSymbol>STOCK0</TickerSymbol>
+    <CostBasis>280.99</CostBasis>
+    <Shares>10</Shares>
+  </AccountPosition>
+  <AccountPosition>
+    <TickerSymbol>STOCK2</TickerSymbol>
+    <CostBasis>1900.22</CostBasis>
+    <Shares>100</Shares>
+  </AccountPosition>
+  <AccountPosition>
+    <TickerSymbol>STOCK3</TickerSymbol>
+    <CostBasis>1900.22</CostBasis>
+    <Shares>100</Shares>
+  </AccountPosition>
+  <AccountPosition>
+    <TickerSymbol>STOCK6</TickerSymbol>
+    <CostBasis>523.43</CostBasis>
+    <Shares>50</Shares>
+  </AccountPosition>
+  <AccountPosition>
+    <TickerSymbol>STOCK7</TickerSymbol>
+    <CostBasis>6990.13</CostBasis>
+    <Shares>25</Shares>
+  </AccountPosition>
+</ArrayOfAccountPosition>

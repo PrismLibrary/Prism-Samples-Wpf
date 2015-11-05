@@ -1,0 +1,229 @@
+﻿<Window x:Class="StockTraderRI.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://www.codeplex.com/prism" 
+    xmlns:inf="clr-namespace:StockTraderRI.Infrastructure;assembly=StockTraderRI.Infrastructure"
+    xmlns:Controls="clr-namespace:StockTraderRI.Controls"
+    xmlns:infBehaviors="clr-namespace:StockTraderRI.Infrastructure.Behaviors;assembly=StockTraderRI.Infrastructure"
+    xmlns:StockTraderRI="clr-namespace:StockTraderRI"
+    infBehaviors:RegionPopupBehaviors.CreatePopupRegionWithName="{x:Static inf:RegionNames.SecondaryRegion}"
+    infBehaviors:RegionPopupBehaviors.ContainerWindowStyle="{StaticResource WindowRegionStyle}"
+    Title="Stock Trader Reference Implementation" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+     ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/background.png"  Stretch="UniformToFill"/>
+    </Window.Background>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type inf:ExtendedHeader}">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ToolTip}">
+                <Image Source="{Binding Path=IconUri}" Width="16" Height="16" />
+                <TextBlock Text="{Binding Path=Title}" />
+            </StackPanel>
+        </DataTemplate>
+         <Storyboard x:Key="InTransition">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Logo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ContentGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ContentGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-72"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="-157"/>
+                <SplineDoubleKeyFrame KeySpline="0.5,0,0.5,1" KeyTime="00:00:01.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Logo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-50"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="-101"/>
+                <SplineDoubleKeyFrame KeySpline="0,0,0,1" KeyTime="00:00:02.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SideGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="1" KeySpline="0,0.5,0.5,1"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SideGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="400"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="400"/>
+                <SplineDoubleKeyFrame KeySpline="0,1,0.5,1" KeyTime="00:00:02" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MainToolbar" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.20833317935466766"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.05"/>
+                <SplineDoubleKeyFrame KeySpline="0,0.495999991893768,0.504000008106232,1" KeyTime="00:00:02" Value="0.05"/>
+                <SplineDoubleKeyFrame KeySpline="0,0.500999987125397,0.504000008106232,1" KeyTime="00:00:02.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeySpline="0,0.495999991893768,0.504000008106232,1" KeyTime="00:00:02" Value="1"/>
+                <SplineDoubleKeyFrame KeySpline="0,0.500999987125397,0.504000008106232,1" KeyTime="00:00:02.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SideGrid" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
+                <SplinePointKeyFrame KeyTime="00:00:00" Value="0.5,0"/>
+                <SplinePointKeyFrame KeyTime="00:00:01.5000000" Value="0.5,0"/>
+                <SplinePointKeyFrame KeyTime="00:00:02" Value="0.5,0"/>
+                <SplinePointKeyFrame KeyTime="00:00:02.5000000" Value="0.5,0"/>
+            </PointAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SideGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="304.47500610351562"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MainToolbar" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="100"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.5000000" Value="100"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="0" KeySpline="0,0.495999991893768,0.504000008106232,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>             
+    </Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource InTransition}"/>
+		</EventTrigger>
+	</Window.Triggers>	
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <Grid Grid.Row="1" RenderTransformOrigin="0.5,0.5" Margin="20,0,20,20">
+            <Grid.Resources>
+                <StockTraderRI:VisibilityToStarHeightConverter x:Key="VisibilityToStarHeightConverter" />
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="124"/>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="{Binding Visibility, ElementName=ActionContent, Converter={StaticResource VisibilityToStarHeightConverter}, ConverterParameter=5}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="650" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- logo -->
+            <Canvas x:Name="Logo" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <TextBlock Text="CFI " TextWrapping="NoWrap" Foreground="#FFC4CFD6" FontSize="72" Opacity="0.85" Canvas.Left="0" Canvas.Top="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="80" Width="135" TextAlignment="Left" FontWeight="Bold" />
+                <TextBlock Text="STOCKTRADER" TextWrapping="NoWrap" Foreground="#FFC4CFD6" FontSize="72" Opacity="0.85" Height="80" TextAlignment="Left" FontWeight="Normal" Width="525" Canvas.Left="150" Canvas.Top="5"/>
+            </Canvas>
+
+            <!-- main bar -->
+            <ItemsControl x:Name="MainToolbar" prism:RegionManager.RegionName="{x:Static inf:RegionNames.MainToolBarRegion}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <!-- content -->
+            <Grid x:Name="ContentGrid" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+			 <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Controls:AnimatedTabControl
+                    x:Name="PositionBuySellTab"
+                    SelectedIndex="0"  
+                    VerticalAlignment="Stretch"
+                    ItemContainerStyle="{StaticResource ShellTabItemStyle}" 
+                    Background="{StaticResource headerBarBG}" 
+                    prism:RegionManager.RegionName="{x:Static inf:RegionNames.MainRegion}"
+                    AutomationProperties.AutomationId="PositionSummaryTab" />
+            </Grid>
+
+            <!-- details -->
+            <Grid x:Name="DetailsGrid" Grid.Row="2" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <ContentControl x:Name="ActionContent" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ActionRegion}">
+                    <ContentControl.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Grid>
+                                <Controls:RoundedBox />
+                                <ContentPresenter Margin="10,0,10,0" Content="{TemplateBinding Content}" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasContent" Value="false">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ContentControl.Template>
+                </ContentControl>
+            </Grid>
+
+            <!-- sidebar -->
+            <Grid x:Name="SideGrid" Margin="10,29,10,10" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" Width="Auto">
+			 <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Controls:ResearchControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ResearchRegion}">
+                    <Controls:ResearchControl.Template>
+                        <ControlTemplate TargetType="Controls:ResearchControl">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Height="30" CornerRadius="12,12,12,12" Margin="0,0,0,10" BorderBrush="#FFFFFFFF" BorderThickness="2,2,2,2" x:Name="rightHeader" Canvas.ZIndex="1" Opacity="0.9" Background="{StaticResource sideBarHeaderBarBG}">
+                                    <ItemsControl ItemsSource="{TemplateBinding Headers}" HorizontalAlignment="Center">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Border>
+                                <Controls:RoundedBox Grid.Row="1" />
+                                <ScrollViewer Grid.Row="1" Width="285" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                    <ItemsPresenter Width="285" />
+                                </ScrollViewer>
+                            </Grid>
+                        </ControlTemplate>
+                    </Controls:ResearchControl.Template>
+                </Controls:ResearchControl>
+            </Grid>	
+			
+        </Grid>
+    </Grid>
+</Window>

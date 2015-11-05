@@ -1,0 +1,58 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:inf="clr-namespace:StockTraderRI.Infrastructure;assembly=StockTraderRI.Infrastructure"
+    xmlns:infConverters="clr-namespace:StockTraderRI.Infrastructure.Converters;assembly=StockTraderRI.Infrastructure"
+    x:Class="StockTraderRI.Modules.Position.Orders.OrderDetailsView"
+    x:Name="UserControl">
+    <UserControl.Resources>
+
+        <ControlTemplate x:Key="ErrorTemplate">
+            <Border BorderBrush="Red" BorderThickness="2">
+                <AdornedElementPlaceholder />
+            </Border>
+        </ControlTemplate>
+        <infConverters:ErrorConverter x:Key="errorConverter"/>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors), Converter={StaticResource errorConverter}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <infConverters:EnumToBooleanConverter x:Key="enumToBooleanConverter" />
+        <infConverters:StringToNullableNumberConverter x:Key="stringToNullableNumberConverter" />
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <RadioButton Name="BuyRadio" AutomationProperties.AutomationId="BuyRadioButton"  IsChecked="{Binding Path=TransactionType, Mode=TwoWay, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static inf:TransactionType.Buy}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Center">Buy</RadioButton>
+            <RadioButton Name="SellRadio" AutomationProperties.AutomationId="SellRadioButton" IsChecked="{Binding Path=TransactionType, Mode=TwoWay, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static inf:TransactionType.Sell}}" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">Sell</RadioButton>
+        </StackPanel>
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Shares:" Foreground="#FF444444" VerticalAlignment="Center" Width="Auto" Height="Auto" HorizontalAlignment="Right" Grid.ColumnSpan="1" Margin="5,0,0,0" />
+        <TextBox Grid.Row="0" Grid.Column="3" AutomationProperties.AutomationId="SharesTextBox" Name="SharesTextBox" Text="{Binding Path=Shares, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalAlignment="Stretch" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="Price Limit:" Foreground="#FF444444" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="5,0,0,0" />
+        <TextBox Name="StopLimitPriceTextBox" AutomationProperties.AutomationId="PriceLimitTextBox" Text="{Binding Path=StopLimitPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Left" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0"  />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Width="Auto" Height="Auto" Text="Order Type:" Foreground="#FF444444" VerticalAlignment="Center" Margin="5,0,0,0" />
+        <ComboBox x:Name="OrderTypeCombo" AutomationProperties.AutomationId="OrderTypeComboBox" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding Path=OrderType, Mode=TwoWay}" ItemsSource="{Binding AvailableOrderTypes}" SelectedValuePath="Value" Grid.Row="1" Grid.Column="1" Width="120" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5,0,0,0" />
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Term:" Foreground="#FF444444" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="5,0,0,0" />
+        <ComboBox Name="TimeInForceCombo" AutomationProperties.AutomationId="TermComboBox" IsSynchronizedWithCurrentItem="True" SelectedValue="{Binding TimeInForce, Mode=TwoWay}" ItemsSource="{Binding AvailableTimesInForce}" SelectedValuePath="Value" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" Width="120" Height="Auto" VerticalAlignment="Center" Margin="5,0,0,0" />
+    </Grid>
+</UserControl>

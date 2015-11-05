@@ -1,0 +1,33 @@
+﻿<UserControl 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chartControls="clr-namespace:StockTraderRI.ChartControls;assembly=StockTraderRI.ChartControls"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    Height="190" x:Class="StockTraderRI.Modules.Market.TrendLine.TrendLineView"
+    >
+    <UserControl.Resources>
+        <!-- By convention every view inside the ResearchControl (ResearchRegion) has to declare 
+             a DataTemplate with the "HeaderIcon" key which defines the icon on the Header -->
+        <DataTemplate x:Key="HeaderIcon">
+            <Grid Margin="15,5,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="13" Width="16">
+                <Path Fill="{x:Null}" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="2" Data="M403.16667,431.66667 L403.16667,448.33299 417.00699,448.33299 417.00699,432.24967"/>
+                <Path HorizontalAlignment="Left" Margin="4.503,6,0,0" Width="2" Fill="{x:Null}" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="2" Data="M403.16667,431.66667 L403.16667,448.33299"/>
+                <Path HorizontalAlignment="Right" Margin="0,2,4.751,0" Width="2" Fill="{x:Null}" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="2" Data="M403.16667,431.66667 L403.16667,448.33299"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Border BorderThickness="0,0,0,1" BorderBrush="#FFFFFFFF" Padding="10,10,10,10">
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding TickerSymbol}" Style="{StaticResource TextBlockSectionTitle}" />
+                <TextBlock Text=" HISTORICAL DATA" AutomationProperties.AutomationId="HistoricalDataTextBlock" Style="{StaticResource TextBlockSectionTitle}" />
+            </StackPanel>
+            <chartControls:LineChart Height="100" x:Name="trendLineChart" Margin="0,20,0,0" ValuePath="Value" LabelPath="DateTimeMarker" Grid.Row="1" 
+                    ItemsSource="{Binding Path=HistoryCollection}" />
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.News.Article.NewsReaderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" Margin="0,0,0,0" x:Name="newsReader">
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="newsReader" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Border BorderThickness="1" Padding="5" Background="#FFFFFFFF">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="5" Height="Auto" FontSize="11" FontWeight="Bold" Foreground="SteelBlue" TextAlignment="Left" TextWrapping="Wrap" HorizontalAlignment="Left" Width="Auto" Text="{Binding NewsArticle.PublishedDate}"></TextBlock>
+            <TextBlock Grid.Row="1" Height="Auto"  Margin="5" FontSize="18" FontWeight="Normal" Foreground="SteelBlue" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=NewsArticle.Title}"></TextBlock>
+            <TextBox Grid.Row="2" BorderBrush="Transparent" Background="#FFFFFFFF" BorderThickness="0,0,0,0" FontSize="12" FontStyle="Normal" 
+                         FontWeight="Normal" Foreground="#FF000000" Opacity="1" OpacityMask="{x:Null}" Text="{Binding NewsArticle.Body}"
+                         TextAlignment="Left" TextWrapping="Wrap" Block.LineHeight="Auto" HorizontalAlignment="Left" VerticalAlignment="Top"
+                         Style="{StaticResource PopupTextBoxStyle}" IsReadOnly="True"/>
+        </Grid>
+    </Border>
+</UserControl>
