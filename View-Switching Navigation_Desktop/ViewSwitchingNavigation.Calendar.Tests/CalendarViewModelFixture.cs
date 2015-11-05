@@ -1,5 +1,3 @@
-
-
 using System;
 using Prism.Regions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,7 +17,7 @@ namespace ViewSwitchingNavigation.Calendar.Tests
             var calendarServiceMock = new Mock<ICalendarService>();
             var requested = false;
             calendarServiceMock
-                .Setup(svc => svc.BeginGetMeetings(It.IsAny<AsyncCallback>(), null))
+                .Setup(svc => svc.GetMeetingsAsync())
                 .Callback(() => requested = true);
 
             var viewModel = new CalendarViewModel(calendarServiceMock.Object, new Mock<IRegionManager>().Object);

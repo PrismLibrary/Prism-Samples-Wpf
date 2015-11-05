@@ -1,13 +1,11 @@
-
-
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ViewSwitchingNavigation.Calendar.Model
 {
     public interface ICalendarService
     {
-        IAsyncResult BeginGetMeetings(AsyncCallback callback, object userState);
-        IEnumerable<Meeting> EndGetMeetings(IAsyncResult result);
+        Task<IEnumerable<Meeting>> GetMeetingsAsync();
     }
 }

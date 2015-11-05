@@ -1,15 +1,15 @@
-
-
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Threading;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Regions;
 using ViewSwitchingNavigation.Contacts.Model;
 using ViewSwitchingNavigation.Infrastructure;
 
@@ -21,15 +21,16 @@ namespace ViewSwitchingNavigation.Contacts.ViewModels
         private const string ComposeEmailViewName = "ComposeEmailView";
         private const string ToQueryItemName = "To";
 
-        private readonly SynchronizationContext synchronizationContext = SynchronizationContext.Current ?? new SynchronizationContext();
         private readonly IRegionManager regionManager;
         private readonly ObservableCollection<Contact> contactsCollection;
         private readonly ICollectionView contactsView;
         private readonly DelegateCommand<object> emailContactCommand;
+        private readonly IContactsService contactsService;
 
         [ImportingConstructor]
         public ContactsViewModel(IContactsService contactsService, IRegionManager regionManager)
         {
+            this.contactsService = contactsService;
             this.emailContactCommand = new DelegateCommand<object>(this.EmailContact, this.CanEmailContact);
 
             this.contactsCollection = new ObservableCollection<Contact>();
@@ -37,20 +38,13 @@ namespace ViewSwitchingNavigation.Contacts.ViewModels
             this.contactsView.CurrentChanged += (s, e) => this.emailContactCommand.RaiseCanExecuteChanged();
 
             this.regionManager = regionManager;
+            var task = Initialize();
+        }
 
-            contactsService.BeginGetContacts((ar) =>
-            {
-                IEnumerable<Contact> newContacts = contactsService.EndGetContacts(ar);
-
-                this.synchronizationContext.Post((state) =>
-                {
-                    foreach (var newContact in newContacts)
-                    {
-                        this.contactsCollection.Add(newContact);
-                    }
-                }, null);
-
-            }, null);
+        private async Task Initialize()
+        {
+            var contacts = await this.contactsService.GetContactsAsync();
+            contacts.ToList().ForEach(c => this.contactsCollection.Add(c));
         }
 
         public ICollectionView Contacts

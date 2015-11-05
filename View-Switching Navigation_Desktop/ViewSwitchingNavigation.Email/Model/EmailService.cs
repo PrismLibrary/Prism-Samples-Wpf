@@ -1,11 +1,10 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Email.Model
@@ -34,46 +33,19 @@ namespace ViewSwitchingNavigation.Email.Model
                 };
         }
 
-        public IAsyncResult BeginGetEmailDocuments(AsyncCallback callback, object userState)
-        {
-            var asyncResult = new AsyncResult<IEnumerable<EmailDocument>>(callback, userState);
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    asyncResult.SetComplete(new ReadOnlyCollection<EmailDocument>(this.emailDocuments), false);
-                });
-
-            return asyncResult;
-        }
-
-        public IEnumerable<EmailDocument> EndGetEmailDocuments(IAsyncResult asyncResult)
-        {
-            var localAsyncResult = AsyncResult<IEnumerable<EmailDocument>>.End(asyncResult);
-
-            return localAsyncResult.Result;
-        }
-
-        public IAsyncResult BeginSendEmailDocument(EmailDocument email, AsyncCallback callback, object userState)
-        {
-            var asyncResult = new AsyncResult<object>(callback, userState);
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    Thread.Sleep(500);
-                    asyncResult.SetComplete(null, false);
-                });
-
-            return asyncResult;
-        }
-
-        public void EndSendEmailDocument(IAsyncResult asyncResult)
-        {
-            var localAsyncResult = AsyncResult<object>.End(asyncResult);
-        }
-
         public EmailDocument GetEmailDocument(Guid id)
         {
             return this.emailDocuments.FirstOrDefault(e => e.Id == id);
+        }
+
+        public Task<IEnumerable<EmailDocument>> GetEmailDocumentsAsync()
+        {
+            return Task.FromResult(new ReadOnlyCollection<EmailDocument>(this.emailDocuments) as IEnumerable<EmailDocument>);
+        }
+
+        public Task SendEmailDocumentAsync(EmailDocument email)
+        {
+            return Task.Delay(500);
         }
     }
 }

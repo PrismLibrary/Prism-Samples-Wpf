@@ -11,15 +11,16 @@ using Prism.Commands;
 using Prism.Regions;
 using ViewSwitchingNavigation.Calendar.Model;
 using ViewSwitchingNavigation.Infrastructure;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Prism.Mvvm;
 
 namespace ViewSwitchingNavigation.Calendar.ViewModels
 {
     [Export]
-    public class CalendarViewModel
+    public class CalendarViewModel : BindableBase
     {
-        private readonly SynchronizationContext synchronizationContext;
         private readonly DelegateCommand<Meeting> openMeetingEmailCommand;
-        private readonly ObservableCollection<Meeting> meetings;
         private readonly IRegionManager regionManager;
         private readonly ICalendarService calendarService;
 
@@ -27,47 +28,32 @@ namespace ViewSwitchingNavigation.Calendar.ViewModels
         private const string EmailViewName = "EmailView";
         private const string EmailIdName = "EmailId";
 
+        private ObservableCollection<Meeting> meetings;
+
         [ImportingConstructor]
         public CalendarViewModel(ICalendarService calendarService, IRegionManager regionManager)
         {
-            this.synchronizationContext = SynchronizationContext.Current ?? new SynchronizationContext();
-
             this.openMeetingEmailCommand = new DelegateCommand<Meeting>(this.OpenMeetingEmail);
-
-            this.meetings = new ObservableCollection<Meeting>();
 
             this.calendarService = calendarService;
             this.regionManager = regionManager;
-
-            this.calendarService.BeginGetMeetings(
-                r =>
-                {
-                    var meetings = this.calendarService.EndGetMeetings(r);
-
-                    this.synchronizationContext.Post(
-                        s =>
-                        {
-                            foreach (var meeting in meetings)
-                            {
-                                this.Meetings.Add(meeting);
-                            }
-                        },
-                        null);
-                },
-                null);
+            var task = this.LoadMeetings();
         }
 
         public ObservableCollection<Meeting> Meetings
         {
-            get
-            {
-                return this.meetings;
-            }
+            get { return meetings; }
+            set { SetProperty(ref meetings, value); }
         }
 
         public ICommand OpenMeetingEmailCommand
         {
             get { return this.openMeetingEmailCommand; }
+        }
+
+        private async Task LoadMeetings()
+        {
+            this.meetings = new ObservableCollection<Meeting>(await this.calendarService.GetMeetingsAsync());
         }
 
         private void OpenMeetingEmail(Meeting meeting)
