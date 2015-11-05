@@ -1,0 +1,241 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:StockTraderRI.ChartControls"
+    >
+  <local:ColorConverter x:Key="ColorConverter"/>
+
+  <Pen x:Key="AxisPen" Thickness="1.0" Brush="Black"/>
+
+   
+  <Style x:Key="{x:Type local:ChartLines}" TargetType="{x:Type local:ChartLines}">
+    <Setter Property="ClipToBounds" Value="True"/>
+  </Style>
+  
+  <Style x:Key="{x:Type local:DiscreteAxis}" TargetType="{x:Type local:DiscreteAxis}">
+    <Setter Property="Template">
+      <Setter.Value>       
+        <ControlTemplate>
+          <ItemsPresenter/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <local:DiscreteAxisPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:DiscreteAxis}}, Path=Orientation}"
+                                   TickMarksLength="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:DiscreteAxis}}, Path=TickLength}"/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Orientation" Value="Horizontal"/>
+  </Style>
+
+
+  <Style x:Key="{x:Type local:ContinuousAxis}" TargetType="{x:Type local:ContinuousAxis}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <ItemsPresenter/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <local:ContinuousAxisPanel Orientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ContinuousAxis}}, Path=Orientation}"/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ReferenceLineSeperation" Value="50.0"/>
+  </Style>
+
+  <Style x:Key="{x:Type local:LineChart}" TargetType="{x:Type local:LineChart}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:LineChart}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  BorderBrush="{TemplateBinding BorderBrush}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <ContentPresenter ContentSource="Title" HorizontalAlignment="Center"/>
+              <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                  <local:ValueExtractor x:Key="extractor" Items="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items}"
+                                        ValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ValuePath}"/>
+                  <local:LabelExtractor x:Key="labelextractor" Items="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items}"
+                                        LabelPath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LabelPath}"/>
+                </Grid.Resources>
+                <local:DiscreteAxis x:Name="HAxis" Grid.Row="1" Grid.Column="2" 
+                                    ItemsSource="{Binding Source={StaticResource labelextractor}, Path=Labels}"
+                                    ItemTemplate="{TemplateBinding LabelAxisItemTemplate}"
+                                    ItemTemplateSelector="{TemplateBinding LabelAxisItemTemplateSelector}"
+                                    TickLength="{TemplateBinding TickLength}"/>
+                <local:ContinuousAxis x:Name="VAxis" Grid.Row="0" Grid.Column="1" 
+                                      SourceValues="{Binding Source={StaticResource extractor}, Path=Values}"
+                                      ItemTemplate="{TemplateBinding ValueAxisItemTemplate}"
+                                      ItemTemplateSelector="{TemplateBinding ValueAxisItemTemplateSelector}"/>
+                <local:ChartLines Grid.Row="0" Grid.Column="2" 
+                                  VerticalAxisTickPositions="{Binding ElementName=VAxis, Path=TickPositions}"
+                                  HorizontalAxisTickPositions="{Binding ElementName=HAxis, Path=TickPositions}"
+                                  HorizontalAxis="{Binding ElementName=VAxis, Path=Origin}"
+                                  VerticalAxis="{Binding ElementName=HAxis, Path=Origin}" 
+                                  DrawVerticalAxisTickMarks="{TemplateBinding ShowValueAxisTicks}" 
+                                  DrawHorizontalAxisTickMarks="{TemplateBinding ShowLabelAxisTicks}" 
+                                  DrawVerticalAxisReferenceLines="{TemplateBinding ShowValueAxisReferenceLines}"
+                                  DrawHorizontalAxisReferenceLines="{TemplateBinding ShowLabelAxisReferenceLines}"
+                                  ReferenceLinePen="{TemplateBinding ReferenceLinePen}" 
+                                  TickMarksLength="{TemplateBinding TickLength}" 
+                                  ClipToBounds="true"/>
+                <ItemsPresenter Grid.Row="0" Grid.Column="2" 
+                                local:LineChartPanel.XValues="{Binding ElementName=HAxis, Path=TickPositions}" 
+                                local:LineChartPanel.YValues="{Binding ElementName=VAxis, Path=Values}"
+                                local:LineChartPanel.HorizontalAxis="{Binding ElementName=VAxis, Path=Origin}" 
+                                ClipToBounds="true"/>
+                <ContentPresenter Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  
+                                  ContentSource="LabelAxisTitle"/>
+                <ContentPresenter Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  ContentSource="ValueAxisTitle"/>
+              </Grid>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <local:LineChartPanel XValues="{TemplateBinding local:LineChartPanel.XValues}" 
+                                YValues="{TemplateBinding local:LineChartPanel.YValues}"
+                                HorizontalAxis="{TemplateBinding local:LineChartPanel.HorizontalAxis}"
+                                LinePen="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:LineChart}}, Path=LinePen}"
+                                AreaBrush="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:LineChart}}, Path=AreaBrush}"
+                                IsSmoothOutline="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:LineChart}}, Path=IsSmoothOutline}"/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Rectangle Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Converter={StaticResource ColorConverter}}" 
+                     Width="5" Height="5" Opacity="0.8"/>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="TickLength" Value="5.0"/>
+    <Setter Property="LinePen" Value="{StaticResource AxisPen}"/>
+    <Setter Property="ReferenceLinePen" Value="{StaticResource AxisPen}"/>
+    <Setter Property="IsSmoothOutline" Value="False"/>
+    <Setter Property="ShowLabelAxisTicks" Value="True"/>
+    <Setter Property="ShowLabelAxisReferenceLines" Value="False"/>
+    <Setter Property="ShowValueAxisTicks" Value="True"/>
+    <Setter Property="ShowValueAxisReferenceLines" Value="True"/>
+  </Style>
+
+  <Style x:Key="{x:Type local:PieChart}" TargetType="{x:Type local:PieChart}">
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <local:PiePanel Values="{TemplateBinding local:PiePanel.Values}"/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:PieChart}">
+          <Border Background="{TemplateBinding Background}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  BorderBrush="{TemplateBinding BorderBrush}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <ContentPresenter ContentSource="Title" HorizontalAlignment="Center"/>
+              <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                  <local:ValueExtractor x:Key="extractor" Items="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items}"
+                                          ValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ValuePath}"/>
+                  <local:LabelExtractor x:Key="labelextractor" Items="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items}"
+                                        LabelPath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LabelPath}"/>
+                </Grid.Resources>
+                <ContentPresenter Grid.Row="1" Grid.Column="0" ContentSource="ValueTitle"/>
+                <ContentPresenter Grid.Row="1" Grid.Column="1" ContentSource="LabelTitle"/>
+                <ItemsPresenter Grid.Row="0" Grid.Column="0" local:PiePanel.Values="{Binding Source={StaticResource extractor}, Path=Values}"/>
+                <ItemsControl Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                         ItemsSource="{Binding Source={StaticResource labelextractor}, Path=Labels}"
+                         ItemTemplate="{TemplateBinding LegendItemTemplate}"
+                         ItemTemplateSelector="{TemplateBinding LegendItemTemplateSelector}"/>
+              </Grid>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemContainerStyle">
+      <Setter.Value>
+        <Style TargetType="{x:Type local:ChartItem}">
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type local:ChartItem}">
+                <local:ClipWedge WedgeAngle ="{TemplateBinding local:PiePanel.WedgeAngle}"
+                  BeginFigurePoint ="{TemplateBinding local:PiePanel.BeginFigurePoint}"
+                  LineToPoint="{TemplateBinding local:PiePanel.LineToPoint}"
+                  Content="{TemplateBinding Content}"
+                  ContentTemplate="{TemplateBinding ContentTemplate}">
+                </local:ClipWedge>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Rectangle Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, AncestorLevel=2}, Converter={StaticResource ColorConverter}}" 
+                     Opacity="0.8"/>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="LegendItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Height="20" Width="20" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorConverter}}"/>
+            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
+          </StackPanel>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

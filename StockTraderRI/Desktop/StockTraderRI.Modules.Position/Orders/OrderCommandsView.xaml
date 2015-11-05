@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.Position.Orders.OrderCommandsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:inf="clr-namespace:StockTraderRI.Infrastructure;assembly=StockTraderRI.Infrastructure">    
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Name="SubmitButton" Command="{Binding SubmitCommand}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand">Submit</Button>
+        <Button Name="CancelButton" Command="{Binding CancelCommand}" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand">Cancel</Button>
+    </StackPanel>
+</UserControl>

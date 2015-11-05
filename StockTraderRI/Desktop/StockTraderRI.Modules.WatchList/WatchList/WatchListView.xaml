@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.Watch.WatchList.WatchListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converters="clr-namespace:StockTraderRI.Infrastructure.Converters;assembly=StockTraderRI.Infrastructure"
+    Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <Converters:CurrencyConverter x:Key="currencyConverter" />
+        <Style x:Key="PathMouseOverStyle" TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="#FF77B6EB"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill" Value="#7F77B6EB"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <ListView Name="watchListListView" 
+                  ItemsSource="{Binding WatchListItems}" SelectedItem="{Binding Mode=TwoWay, Path=CurrentWatchItem}"
+                  AlternationCount="2"
+                  BorderThickness="0" Width="Auto"
+                  IsSynchronizedWithCurrentItem="True" AutomationProperties.AutomationId="WatchListGrid" >
+            <ListView.View>
+                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Watch List" >
+                    <GridViewColumn Header="Symbol" DisplayMemberBinding="{Binding Path=TickerSymbol}" Width="65"/>
+                    <GridViewColumn Header="Last"  DisplayMemberBinding="{Binding Converter={StaticResource currencyConverter}, Path=CurrentPrice}" Width="85" />
+                    <GridViewColumn Header="Actions">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                    <Button Command="{Binding DataContext.RemoveWatchCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding TickerSymbol}" AutomationProperties.AutomationId="ActionsRemoveButton" Template="{StaticResource RemoveXButtonTemplate}"  Cursor="Hand" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
+</UserControl>

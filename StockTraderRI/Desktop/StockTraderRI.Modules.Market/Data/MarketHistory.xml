@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MarketHistoryItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MarketHistoryItem TickerSymbol="STOCK0" Date="2008-02-23">30.00</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK0" Date="2008-02-24">35.00</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK0" Date="2008-02-25">50.00</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK0" Date="2008-02-26">75.00</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK0" Date="2008-02-27">50.00</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="STOCK1" Date="2008-01-01">78.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK1" Date="2008-01-02">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK1" Date="2008-01-03">228.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK1" Date="2008-01-04">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK1" Date="2008-01-05">28.13</MarketHistoryItem>
+  
+  <MarketHistoryItem TickerSymbol="STOCK2" Date="2008-01-01">123.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK2" Date="2008-02-01">23.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK2" Date="2008-03-01">123.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK2" Date="2008-04-01">27.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK2" Date="2008-05-01">123.80</MarketHistoryItem>
+  
+  <MarketHistoryItem TickerSymbol="STOCK3" Date="2008-01-01">37.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK3" Date="2008-06-01">334.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK3" Date="2009-01-01">134.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK3" Date="2009-06-01">234.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK3" Date="2010-01-01">134.22</MarketHistoryItem>
+  
+  <MarketHistoryItem TickerSymbol="STOCK4" Date="2008-01-01">6.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK4" Date="2009-01-01">10.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK4" Date="2010-01-01">.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK4" Date="2011-01-01">27.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK4" Date="2012-01-01">30.46</MarketHistoryItem>
+  
+  <MarketHistoryItem TickerSymbol="STOCK5" Date="2008-01-01">28.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK5" Date="2008-01-02">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK5" Date="2008-01-03">228.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK5" Date="2008-01-04">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK5" Date="2008-01-05">28.13</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="STOCK6" Date="2008-01-01">123.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK6" Date="2008-02-01">23.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK6" Date="2008-03-01">123.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK6" Date="2008-04-01">273.80</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK6" Date="2008-05-01">123.80</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="STOCK7" Date="2008-01-01">34.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK7" Date="2008-06-01">334.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK7" Date="2009-01-01">134.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK7" Date="2009-06-01">234.22</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK7" Date="2010-01-01">134.22</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="STOCK8" Date="2008-01-01">6.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK8" Date="2009-01-01">10.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK8" Date="2010-01-01">4.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK8" Date="2011-01-01">20.46</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK8" Date="2012-01-01">30.46</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="STOCK9" Date="2008-01-01">328.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK9" Date="2008-01-02">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK9" Date="2008-01-03">228.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK9" Date="2008-01-04">128.13</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="STOCK9" Date="2008-01-05">28.13</MarketHistoryItem>
+
+  <MarketHistoryItem TickerSymbol="FAKEINDEX" Date="2008-01-01">2000</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="FAKEINDEX" Date="2008-01-02">2100</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="FAKEINDEX" Date="2008-01-03">2150</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="FAKEINDEX" Date="2008-01-04">2200</MarketHistoryItem>
+  <MarketHistoryItem TickerSymbol="FAKEINDEX" Date="2008-01-05">2250</MarketHistoryItem>
+
+
+</MarketHistoryItems>

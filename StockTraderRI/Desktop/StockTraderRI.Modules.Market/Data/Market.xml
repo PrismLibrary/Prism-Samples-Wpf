@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MarketItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" RefreshRate="5">
+  <MarketItem TickerSymbol="STOCK0" LastPrice="37.00" Volume="1000"></MarketItem>
+  <MarketItem TickerSymbol="STOCK1" LastPrice="78.13" Volume="100"></MarketItem>
+  <MarketItem TickerSymbol="STOCK2" LastPrice="23.80" Volume="200"></MarketItem>
+  <MarketItem TickerSymbol="STOCK3" LastPrice="34.22" Volume="300"></MarketItem>
+  <MarketItem TickerSymbol="STOCK4" LastPrice="76.46" Volume="400"></MarketItem>
+  <MarketItem TickerSymbol="STOCK5" LastPrice="730.00" Volume="1000"></MarketItem>
+  <MarketItem TickerSymbol="STOCK6" LastPrice="28.13" Volume="100"></MarketItem>
+  <MarketItem TickerSymbol="STOCK7" LastPrice="273.80" Volume="200"></MarketItem>
+  <MarketItem TickerSymbol="STOCK8" LastPrice="74.22" Volume="300"></MarketItem>
+  <MarketItem TickerSymbol="STOCK9" LastPrice="776.46" Volume="400"></MarketItem>
+</MarketItems>

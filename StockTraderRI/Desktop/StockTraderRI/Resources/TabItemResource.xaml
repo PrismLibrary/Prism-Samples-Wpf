@@ -1,0 +1,38 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4"/>
+	<SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="#FFC9C7BA"/>
+	<Style x:Key="ShellTabItemStyle" TargetType="{x:Type TabItem}">
+		<Setter Property="FontFamily" Value="Trebuchet MS"/>
+		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="Header" Value="{Binding Content.DataContext.HeaderInfo, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Template">
+			<Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid Width="Auto" Height="Auto" x:Name="TabItemRoot" Margin="10,0,10,0">
+                        <ContentPresenter Margin="13,5,13,5" x:Name="Content" ContentSource="Header" RecognizesAccessKey="True"/>
+                        <Border x:Name="border" Height="Auto" Padding="0,0,0,0" Opacity="0">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#A3FFFFFF" Offset="0"/>
+                                    <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Content" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="false">
+                            <Setter TargetName="Content" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

@@ -1,0 +1,114 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:Controls="clr-namespace:StockTraderRI.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
+
+    <Style TargetType="Controls:AnimatedTabControl">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Padding" Value="4,4,4,4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}"/>
+        <Setter Property="Background" Value="#F9F9F9"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:AnimatedTabControl">
+
+                    <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Height="30" Margin="10,0,10,10"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Grid.Row="1" CornerRadius="12,12,12,12" Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" BorderBrush="#FFFFFFFF">
+                            <TabPanel x:Name="HeaderPanel" HorizontalAlignment="Center" VerticalAlignment="Center" IsItemsHost="true" Grid.Column="0" Grid.Row="0" KeyboardNavigation.TabIndex="1"/>
+                        </Border>
+
+                        <Grid Grid.Row="1" Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Viewport3D x:Name="vp3D" Visibility="Hidden" Width="Auto" Height="Auto">
+                                <Viewport3D.Camera>
+                                    <PerspectiveCamera x:Name="camera" Position="0,0,0.5" LookDirection="0,0,-1" FieldOfView="90" />
+                                </Viewport3D.Camera>
+                                <Viewport3D.Children>
+                                    <ModelVisual3D>
+                                        <ModelVisual3D.Content>
+                                            <Model3DGroup>
+                                                <DirectionalLight Color="#444" Direction="0,0,-1" />
+                                                <AmbientLight Color="#BBB" />
+                                            </Model3DGroup>
+                                        </ModelVisual3D.Content>
+                                    </ModelVisual3D>
+                                    <ModelVisual3D>
+                                        <ModelVisual3D.Content>
+                                            <GeometryModel3D>
+                                                <GeometryModel3D.Geometry>
+                                                    <MeshGeometry3D  TriangleIndices="0,1,2 2,3,0" TextureCoordinates="0,1 1,1 1,0 0,0" Positions="-0.5,-0.5,0 0.5,-0.5,0 0.5,0.5,0 -0.5,0.5,0" />
+                                                </GeometryModel3D.Geometry>
+                                                <GeometryModel3D.Material>
+                                                    <DiffuseMaterial>
+                                                        <DiffuseMaterial.Brush>
+                                                            <VisualBrush Visual="{Binding ElementName=BorderIn}" Stretch="Uniform" />
+                                                        </DiffuseMaterial.Brush>
+                                                    </DiffuseMaterial>
+                                                </GeometryModel3D.Material>
+                                                <GeometryModel3D.BackMaterial>
+                                                    <DiffuseMaterial>
+                                                        <DiffuseMaterial.Brush>
+                                                            <VisualBrush Visual="{Binding ElementName=BorderIn}" Stretch="Uniform">
+                                                                <VisualBrush.RelativeTransform>
+                                                                    <ScaleTransform ScaleX="-1" CenterX="0.5" />
+                                                                </VisualBrush.RelativeTransform>
+                                                            </VisualBrush>
+                                                        </DiffuseMaterial.Brush>
+                                                    </DiffuseMaterial>
+                                                </GeometryModel3D.BackMaterial>
+                                                <GeometryModel3D.Transform>
+                                                    <RotateTransform3D>
+                                                        <RotateTransform3D.Rotation>
+                                                            <AxisAngleRotation3D x:Name="rotate" Axis="0,3,0" Angle="0" />
+                                                        </RotateTransform3D.Rotation>
+                                                    </RotateTransform3D>
+                                                </GeometryModel3D.Transform>
+                                            </GeometryModel3D>
+                                        </ModelVisual3D.Content>
+                                    </ModelVisual3D>
+                                </Viewport3D.Children>
+                            </Viewport3D>
+                            <Border x:Name="BorderOut" VerticalAlignment="Stretch">
+                                <Border x:Name="BorderIn" VerticalAlignment="Stretch" Background="#00000000" >
+                                    <Grid>
+                                        <Controls:RoundedBox Margin="10" />
+                                        <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="20"/>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Controls:AnimatedTabControl.SelectionChanging">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="vp3D"  Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:1.1" Value="{x:Static Visibility.Hidden}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <DoubleAnimation To="0" Duration="0:0:0.05" Storyboard.TargetName="BorderOut" Storyboard.TargetProperty="Opacity" />
+                                    <DoubleAnimation BeginTime="0:0:1.05" Duration="0:0:0.05" To="1" Storyboard.TargetName="BorderOut" Storyboard.TargetProperty="Opacity" />
+                                    <Point3DAnimation To="0,0,1.1" From="0,0,0.5"  BeginTime="0:0:0.05" Duration="0:0:0.5" AutoReverse="True" DecelerationRatio="0.3"  Storyboard.TargetName="camera" 
+                                            Storyboard.TargetProperty="(PerspectiveCamera.Position)" />
+                                    <DoubleAnimation From="0" To="180" AccelerationRatio="0.3" DecelerationRatio="0.3" BeginTime="0:0:0.05" Duration="0:0:1"  Storyboard.TargetName="rotate" Storyboard.TargetProperty="Angle" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Resource dictionary entries should be defined here. -->
+</ResourceDictionary>

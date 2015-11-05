@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="StockTraderRI.Modules.Position.PositionSummary.PositionSummaryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converters="clr-namespace:StockTraderRI.Infrastructure.Converters;assembly=StockTraderRI.Infrastructure">
+    <UserControl.Resources>
+        <Converters:CurrencyConverter x:Key="currencyConverter" />
+        <Converters:PercentConverter x:Key="percentConverter" />
+        <Converters:DecimalToColorConverter x:Key="decimalToColorConverter" />
+        <DataTemplate x:Key="GainLossTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource percentConverter}, Path=GainLossPercent}" 
+                                     Foreground="{Binding Converter={StaticResource decimalToColorConverter}, Path=GainLossPercent}" />
+        </DataTemplate>
+    </UserControl.Resources>
+    <ListView BorderThickness="0" Width="Auto"
+                  ItemsSource="{Binding Path=Position.Items}" 
+                  SelectedItem="{Binding Path=CurrentPositionSummaryItem, Mode=TwoWay}"  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True" AutomationProperties.AutomationId="PositionSummaryGrid">
+        <ListView.View>
+            <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Current positions"
+                          >
+                <GridViewColumn Header="Symbol" 
+            		DisplayMemberBinding="{Binding Path=TickerSymbol}" 
+            		Width="65"/>
+                <GridViewColumn Header="Shares"  
+                  DisplayMemberBinding="{Binding Path=Shares}"
+                  Width="65" />
+                <GridViewColumn Header="Last"  
+                  DisplayMemberBinding="{Binding Converter={StaticResource currencyConverter}, Path=CurrentPrice}"
+                  Width="65" />
+                <GridViewColumn Header="Cost Basis"  
+                  DisplayMemberBinding="{Binding Converter={StaticResource currencyConverter}, Path=CostBasis}"
+                  Width="85" />
+                <GridViewColumn Header="Market Value"  
+                  DisplayMemberBinding="{Binding Converter={StaticResource currencyConverter}, Path=MarketValue}"
+                  Width="85" />
+                <GridViewColumn Header="Gain/Loss %" DisplayMemberBinding="{Binding Converter={StaticResource percentConverter}, Path=GainLossPercent}"  CellTemplate="{StaticResource GainLossTemplate}" Width="85" />
+                <GridViewColumn Header="Actions">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="47"/>
+                                    <ColumnDefinition  Width="47"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" Command="{Binding Path=DataContext.BuyCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding Path=TickerSymbol}" AutomationProperties.AutomationId="ActionsBuyButton" Template="{StaticResource AddButtonTemplate}"  Cursor="Hand" Width="30" />
+                                <Button Grid.Column="1" Command="{Binding Path=DataContext.SellCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding Path=TickerSymbol}" AutomationProperties.AutomationId="ActionsSellButton" Template="{StaticResource RemoveButtonTemplate}" Cursor="Hand"  Width="30"/>
+
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView>
+</UserControl>
