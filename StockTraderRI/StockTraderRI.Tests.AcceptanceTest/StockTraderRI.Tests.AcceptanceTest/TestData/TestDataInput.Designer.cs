@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StockTraderRI.Infrastructure.Properties {
+namespace StockTraderRI.Tests.AcceptanceTest.TestData {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace StockTraderRI.Infrastructure.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class TestDataInput {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal TestDataInput() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace StockTraderRI.Infrastructure.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StockTraderRI.Infrastructure.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StockTraderRI.Tests.AcceptanceTest.TestData.TestDataInput", typeof(TestDataInput).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,92 @@ namespace StockTraderRI.Infrastructure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot convert from type {0} to enum type {1}.  The source value must be a string type..
+        ///   Looks up a localized string similar to -20.15.
         /// </summary>
-        internal static string CannotConvertFromTypeToEnum {
+        internal static string DefaultInvalidPriceLimit {
             get {
-                return ResourceManager.GetString("CannotConvertFromTypeToEnum", resourceCulture);
+                return ResourceManager.GetString("DefaultInvalidPriceLimit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter should be convertible to an integer..
+        ///   Looks up a localized string similar to -15.
         /// </summary>
-        internal static string CannotConvertParameterToIntegerException {
+        internal static string DefaultInvalidShares {
             get {
-                return ResourceManager.GetString("CannotConvertParameterToIntegerException", resourceCulture);
+                return ResourceManager.GetString("DefaultInvalidShares", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Behavior cannot be attached to a null Region..
+        ///   Looks up a localized string similar to 20.15.
         /// </summary>
-        internal static string InvalidAttachedRegion {
+        internal static string DefaultPriceLimit {
             get {
-                return ResourceManager.GetString("InvalidAttachedRegion", resourceCulture);
+                return ResourceManager.GetString("DefaultPriceLimit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot apply ActivateViewOnFocusBehavior to a Region that contains Views that are not UIElement..
+        ///   Looks up a localized string similar to 10.
         /// </summary>
-        internal static string InvalidViewOnActivateViewOnFocusBehavior {
+        internal static string DefaultShares {
             get {
-                return ResourceManager.GetString("InvalidViewOnActivateViewOnFocusBehavior", resourceCulture);
+                return ResourceManager.GetString("DefaultShares", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The type {0} does not have a public property named &apos;{1}&apos;. The current implementation of &apos;{2}&apos; does not allow specifying a nested path or a member that is not a property..
+        ///   Looks up a localized string similar to End of day.
         /// </summary>
-        internal static string SelectorExtensionCannotResolveMember {
+        internal static string DefaultTerm {
             get {
-                return ResourceManager.GetString("SelectorExtensionCannotResolveMember", resourceCulture);
+                return ResourceManager.GetString("DefaultTerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        internal static string DefaultValue {
+            get {
+                return ResourceManager.GetString("DefaultValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 7.
+        /// </summary>
+        internal static string PositionSummaryColumnCount {
+            get {
+                return ResourceManager.GetString("PositionSummaryColumnCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5.
+        /// </summary>
+        internal static string PositionSummaryRowCount {
+            get {
+                return ResourceManager.GetString("PositionSummaryRowCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock0.
+        /// </summary>
+        internal static string StockName {
+            get {
+                return ResourceManager.GetString("StockName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.
+        /// </summary>
+        internal static string WatchListRowCount {
+            get {
+                return ResourceManager.GetString("WatchListRowCount", resourceCulture);
             }
         }
     }
