@@ -72,15 +72,11 @@ namespace StockTraderRI.Tests.AcceptanceTest.TestEntities.Assertion
                 // Get the Stock name 
                 symbol = gridPattern.GetItem(rowCountIndex, 0).Current.Name; // Column 0 is for Stock
 
-
                 
                 //input columns
                 share = double.Parse(gridPattern.GetItem(rowCountIndex, 1).Current.Name, NumberStyles.Currency).ToString(); // Column 1 is for number of share
-                //share = gridPattern.GetItem(rowCountIndex, 1).Current.Name.Replace('$', '0'); // Column 1 is for number of share
                 lastPrice = double.Parse(gridPattern.GetItem(rowCountIndex, 2).Current.Name, NumberStyles.Currency).ToString(); // Column 2 is for last price
-                //lastPrice = gridPattern.GetItem(rowCountIndex, 2).Current.Name.Replace('$', '0'); // Column 2 is for last price
                 costBasis = double.Parse(gridPattern.GetItem(rowCountIndex, 3).Current.Name, NumberStyles.Currency).ToString(); // Column 3 is for cost
-                //costBasis = gridPattern.GetItem(rowCountIndex, 3).Current.Name.Replace('$', '0'); // Column 3 is for cost
 
                 //computed columns
                 marketPrice = double.Parse(gridPattern.GetItem(rowCountIndex, 4).Current.Name, NumberStyles.Currency).ToString(); // Column 3 is for cost
