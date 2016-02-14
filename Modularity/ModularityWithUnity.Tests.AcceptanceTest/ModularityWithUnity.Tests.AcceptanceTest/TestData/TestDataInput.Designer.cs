@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ModularityWithUnity.Desktop.Properties {
+namespace ModularityWithUnity.Tests.AcceptanceTest.TestData {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ModularityWithUnity.Desktop.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class TestDataInput {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal TestDataInput() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ModularityWithUnity.Desktop.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ModularityWithUnity.Desktop.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ModularityWithUnity.Tests.AcceptanceTest.TestData.TestDataInput", typeof(TestDataInput).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,42 +57,6 @@ namespace ModularityWithUnity.Desktop.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module constructed..
-        /// </summary>
-        internal static string ModuleConstructed {
-            get {
-                return ResourceManager.GetString("ModuleConstructed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module initialized..
-        /// </summary>
-        internal static string ModuleIsInitialized {
-            get {
-                return ResourceManager.GetString("ModuleIsInitialized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module is loading {1}/{2} bytes..
-        /// </summary>
-        internal static string ModuleIsLoadingProgress {
-            get {
-                return ResourceManager.GetString("ModuleIsLoadingProgress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module loaded..
-        /// </summary>
-        internal static string ModuleLoaded {
-            get {
-                return ResourceManager.GetString("ModuleLoaded", resourceCulture);
             }
         }
     }

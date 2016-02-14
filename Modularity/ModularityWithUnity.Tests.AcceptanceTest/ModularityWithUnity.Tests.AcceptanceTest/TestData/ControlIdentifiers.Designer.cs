@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ModularityWithUnity.Desktop.Properties {
+namespace ModularityWithUnity.Tests.AcceptanceTest.TestData {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ModularityWithUnity.Desktop.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class ControlIdentifiers {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ControlIdentifiers() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ModularityWithUnity.Desktop.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ModularityWithUnity.Desktop.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ModularityWithUnity.Tests.AcceptanceTest.TestData.ControlIdentifiers", typeof(ControlIdentifiers).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,83 @@ namespace ModularityWithUnity.Desktop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module constructed..
+        ///   Looks up a localized string similar to (Click to load).
         /// </summary>
-        internal static string ModuleConstructed {
+        internal static string ClickToLoadTextBlock {
             get {
-                return ResourceManager.GetString("ModuleConstructed", resourceCulture);
+                return ResourceManager.GetString("ClickToLoadTextBlock", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module initialized..
+        ///   Looks up a localized string similar to Modularity with Unity QuickStart - Desktop.
         /// </summary>
-        internal static string ModuleIsInitialized {
+        internal static string DesktopApplicationTitle {
             get {
-                return ResourceManager.GetString("ModuleIsInitialized", resourceCulture);
+                return ResourceManager.GetString("DesktopApplicationTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module is loading {1}/{2} bytes..
+        ///   Looks up a localized string similar to ModuleAAutomationId.
         /// </summary>
-        internal static string ModuleIsLoadingProgress {
+        internal static string ModuleA_Wpf {
             get {
-                return ResourceManager.GetString("ModuleIsLoadingProgress", resourceCulture);
+                return ResourceManager.GetString("ModuleA_Wpf", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; module loaded..
+        ///   Looks up a localized string similar to ModuleBAutomationId.
         /// </summary>
-        internal static string ModuleLoaded {
+        internal static string ModuleB_Wpf {
             get {
-                return ResourceManager.GetString("ModuleLoaded", resourceCulture);
+                return ResourceManager.GetString("ModuleB_Wpf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ModuleCAutomationId.
+        /// </summary>
+        internal static string ModuleC_Wpf {
+            get {
+                return ResourceManager.GetString("ModuleC_Wpf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ModuleDAutomationId.
+        /// </summary>
+        internal static string ModuleD_Wpf {
+            get {
+                return ResourceManager.GetString("ModuleD_Wpf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ModuleEAutomationId.
+        /// </summary>
+        internal static string ModuleE_Wpf {
+            get {
+                return ResourceManager.GetString("ModuleE_Wpf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ModuleFAutomationId.
+        /// </summary>
+        internal static string ModuleF_Wpf {
+            get {
+                return ResourceManager.GetString("ModuleF_Wpf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ModuleAutomationId.
+        /// </summary>
+        internal static string Modules_Wpf {
+            get {
+                return ResourceManager.GetString("Modules_Wpf", resourceCulture);
             }
         }
     }
