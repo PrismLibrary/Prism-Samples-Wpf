@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "State-Based Navigation.Tests.AcceptanceTest", "State-Based Navigation.Tests.AcceptanceTest\State-Based Navigation.Tests.AcceptanceTest.csproj", "{CCB4AF52-7735-4A89-BDD1-BCAFAD5B0F65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptanceTestLibrary", "..\..\..\AcceptanceTestLibrary\AcceptanceTestLibrary\AcceptanceTestLibrary.csproj", "{5A2F8F44-4D68-4010-84D8-8019C9B5C5E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCB4AF52-7735-4A89-BDD1-BCAFAD5B0F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCB4AF52-7735-4A89-BDD1-BCAFAD5B0F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCB4AF52-7735-4A89-BDD1-BCAFAD5B0F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCB4AF52-7735-4A89-BDD1-BCAFAD5B0F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2F8F44-4D68-4010-84D8-8019C9B5C5E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2F8F44-4D68-4010-84D8-8019C9B5C5E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2F8F44-4D68-4010-84D8-8019C9B5C5E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2F8F44-4D68-4010-84D8-8019C9B5C5E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = State-Based Navigation.Tests.AcceptanceTest2.vsmdi
+	EndGlobalSection
+EndGlobal

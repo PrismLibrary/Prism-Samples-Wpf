@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="UIComposition.EmployeeModule.Views.EmployeeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.Background>
+			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="#FF7B97D4" />
+				<GradientStop Color="#FF244C8D" Offset="1" />
+			</LinearGradientBrush>
+		</Grid.Background>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" Text="Employee List View" TextWrapping="Wrap" Grid.RowSpan="1" Grid.ColumnSpan="2" FontSize="18" Foreground="#FF2F3806" Margin="8,8,8,8" />
+
+        <DataGrid x:Name="EmployeesList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionMode="Single"
+                           ItemsSource="{Binding Path=Employees}" AutoGenerateColumns="False" Margin="8"
+                           AutomationProperties.AutomationId="EmployeesListGrid" IsReadOnly="True">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="First Name" Binding="{Binding Path=Name}" IsReadOnly="True" Width="*" />
+				<DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}" IsReadOnly="True" Width="*" />
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</Grid>
+
+</UserControl>
