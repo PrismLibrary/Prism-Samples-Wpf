@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="ModuleB.ActivityView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="Auto" Padding="5" AutomationProperties.AutomationId="ActivityView">
+    <Border BorderBrush="#3E606F" Background="#D1DBBD" BorderThickness="2"  CornerRadius="4,4,4,4" Padding="7">
+        <StackPanel Name="ContentPanel">
+            <Label Name="ActivityLabel" FontWeight="Bold" Padding="0" Margin="0"/>
+        </StackPanel>
+    </Border>
+</UserControl>
