@@ -52,8 +52,8 @@
             <TextBlock Margin="5" FontSize="24" Foreground="DarkGreen" TextWrapping="Wrap">Interaction Requests</TextBlock>
             <TextBlock Margin="5" TextWrapping="Wrap">The InteractionRequest and InteractionRequestTriggers classes usually work in pairs like this:</TextBlock>
             <TextBlock Margin="5,0" TextWrapping="Wrap">The <Bold>InteractionRequest</Bold> goes in the view model and is exposed through a property. When the view model needs to interact with the user, it invokes the Raise method to start the interaction.</TextBlock>
-            <TextBlock Margin="5" TextWrapping="Wrap">The <Bold>InteractionRequestTrigger</Bold> goes in the view and subscribes to the InteractionRequest through bindings. When the interaction is raised it will executes its corresponding actions.</TextBlock>
-            <TextBlock Margin="5" TextWrapping="Wrap">In this Quickstart, we are using <Bold>PopupWindowActions</Bold> to shown popups when an interaction is raised.</TextBlock>
+            <TextBlock Margin="5" TextWrapping="Wrap">The <Bold>InteractionRequestTrigger</Bold> goes in the view and subscribes to the InteractionRequest through bindings. When the interaction is raised it will execute its corresponding actions.</TextBlock>
+            <TextBlock Margin="5" TextWrapping="Wrap">In this Quickstart, we are using <Bold>PopupWindowActions</Bold> to show popups when an interaction is raised.</TextBlock>
             
             <Button AutomationProperties.AutomationId="NotificationButton" x:Name="temp" Margin="5" Content="Raise Default Notification" Command="{Binding RaiseNotificationCommand}" />
             <Button AutomationProperties.AutomationId="ConfirmationButton" Margin="5" Content="Raise Default Confirmation" Command="{Binding RaiseConfirmationCommand}" />
