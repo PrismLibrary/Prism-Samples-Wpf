@@ -3,7 +3,6 @@ using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
