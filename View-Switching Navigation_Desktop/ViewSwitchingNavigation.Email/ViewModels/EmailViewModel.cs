@@ -4,14 +4,11 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.ComponentModel.Composition;
 using System.Windows.Input;
 using ViewSwitchingNavigation.Email.Model;
 
 namespace ViewSwitchingNavigation.Email.ViewModels
 {
-    [Export]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmailViewModel : BindableBase, INavigationAware
     {
         private readonly DelegateCommand goBackCommand;
@@ -20,7 +17,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         private IRegionNavigationJournal navigationJournal;
         private const string EmailIdKey = "EmailId";
 
-        [ImportingConstructor]
         public EmailViewModel(IEmailService emailService)
         {
             this.goBackCommand = new DelegateCommand(this.GoBack);
@@ -45,7 +41,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
                 this.SetProperty(ref this.email, value);
             }
         }
-
 
         private void GoBack()
         {

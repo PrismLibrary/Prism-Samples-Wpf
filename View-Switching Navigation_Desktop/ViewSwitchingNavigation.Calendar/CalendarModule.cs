@@ -1,22 +1,35 @@
 
-
-using System.ComponentModel.Composition;
-using Prism.Mef.Modularity;
+using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
+using Prism.Unity;
+using ViewSwitchingNavigation.Calendar.Model;
 using ViewSwitchingNavigation.Calendar.Views;
+using ViewSwitchingNavigation.Calendar.ViewModels;
 using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Calendar
 {
-    [ModuleExport(typeof(CalendarModule))]
     public class CalendarModule : IModule
     {
-        [Import]
-        public IRegionManager RegionManager;
+        private IUnityContainer unityContainer;
+        private IRegionManager regionManager;
+
+        public CalendarModule(IUnityContainer unityContainer, IRegionManager regionManager)
+        {
+            this.unityContainer = unityContainer;
+            this.regionManager = regionManager;
+        }
 
         public void Initialize()
         {
+            this.unityContainer.RegisterType<ICalendarService, CalendarService>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<CalendarViewModel>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<CalendarNavigationItemView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<CalendarView>(new ContainerControlledLifetimeManager());
+
+            this.unityContainer.RegisterTypeForNavigation<CalendarView>();
+
             // todo: 11 - Pre-populating regions with items
             // Items may be placed in regions prior to navigating to them.  In this case, since we're registering
             // the type CalendarNavigationItemView, it will be created and added to the region when the MainNavigationRegion 
@@ -24,7 +37,7 @@ namespace ViewSwitchingNavigation.Calendar
             // the view itself won't be visible until it's navigated to. 
             //
             // Anything placed in a region in this manner will not be added to the navigation journal.
-            this.RegionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(CalendarNavigationItemView));
+            this.regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(CalendarNavigationItemView));
         }
     }
 }

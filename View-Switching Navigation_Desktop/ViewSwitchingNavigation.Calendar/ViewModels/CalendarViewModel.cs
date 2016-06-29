@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Text;
 using System.Threading;
 using System.Windows.Input;
@@ -17,7 +16,6 @@ using Prism.Mvvm;
 
 namespace ViewSwitchingNavigation.Calendar.ViewModels
 {
-    [Export]
     public class CalendarViewModel : BindableBase
     {
         private readonly DelegateCommand<Meeting> openMeetingEmailCommand;
@@ -30,7 +28,6 @@ namespace ViewSwitchingNavigation.Calendar.ViewModels
 
         private ObservableCollection<Meeting> meetings;
 
-        [ImportingConstructor]
         public CalendarViewModel(ICalendarService calendarService, IRegionManager regionManager)
         {
             this.openMeetingEmailCommand = new DelegateCommand<Meeting>(this.OpenMeetingEmail);

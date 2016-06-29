@@ -1,8 +1,6 @@
 
 
 using System;
-using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using Prism.Modularity;
 using Prism.Regions;
 using ViewSwitchingNavigation.Infrastructure;
@@ -10,25 +8,22 @@ using System.Windows;
 
 namespace ViewSwitchingNavigation
 {
-    [Export]
-    public partial class Shell : Window, IPartImportsSatisfiedNotification
+    public partial class Shell : Window
     {
         private const string EmailModuleName = "EmailModule";
         private static Uri InboxViewUri = new Uri("/InboxView", UriKind.Relative);
-        public Shell()
+
+        private IRegionManager regionManager;
+        private IModuleManager moduleManager;
+
+        public Shell(IRegionManager regionManager, IModuleManager moduleManager)
         {
+            this.regionManager = regionManager;
+            this.moduleManager = moduleManager;
+
             InitializeComponent();
-        }
 
-        [Import(AllowRecomposition = false)]
-        public IModuleManager ModuleManager;
-
-        [Import(AllowRecomposition = false)]
-        public IRegionManager RegionManager;
-
-        public void OnImportsSatisfied()
-        {
-            this.ModuleManager.LoadModuleCompleted +=
+            this.moduleManager.LoadModuleCompleted +=
                 (s, e) =>
                 {
                     // todo: 01 - Navigation on when modules are loaded.
@@ -44,7 +39,7 @@ namespace ViewSwitchingNavigation
                     //     
                     if (e.ModuleInfo.ModuleName == EmailModuleName)
                     {
-                        this.RegionManager.RequestNavigate(
+                        this.regionManager.RequestNavigate(
                             RegionNames.MainContentRegion,
                             InboxViewUri);
                     }

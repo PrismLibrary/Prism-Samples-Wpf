@@ -1,20 +1,19 @@
 
 
-using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using ViewSwitchingNavigation.Email.ViewModels;
 
 namespace ViewSwitchingNavigation.Email.Views
 {
-    [Export("InboxView")]
     public partial class InboxView : UserControl
     {
-        public InboxView()
+        public InboxView(InboxViewModel viewModel)
         {
             InitializeComponent();
+
+            this.ViewModel = viewModel;
         }
 
-        [Import]
         public InboxViewModel ViewModel
         {
             get { return this.DataContext as InboxViewModel; }

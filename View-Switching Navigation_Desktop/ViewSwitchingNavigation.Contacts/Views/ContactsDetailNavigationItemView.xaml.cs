@@ -1,16 +1,14 @@
 
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using Prism.Regions;
 
 namespace ViewSwitchingNavigation.Contacts.Views
 {
-    [Export]
     [ViewSortHint("03")]
-    public partial class ContactsDetailNavigationItemView : UserControl, IPartImportsSatisfiedNotification
+    public partial class ContactsDetailNavigationItemView : UserControl
     {
         private const string mainContentRegionName = "MainContentRegion";
 
@@ -18,16 +16,14 @@ namespace ViewSwitchingNavigation.Contacts.Views
         // This naigation uri provides additional query data to indicate the 'Details' view should be shown.
         private static Uri contactsDetailsViewUri = new Uri("ContactsView?Show=Details", UriKind.Relative);
 
-        [Import]
-        public IRegionManager regionManager;
+        private IRegionManager regionManager;
 
-        public ContactsDetailNavigationItemView()
+        public ContactsDetailNavigationItemView(IRegionManager regionManager)
         {
+            this.regionManager = regionManager;
+
             InitializeComponent();
-        }
 
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
             IRegion mainContentRegion = this.regionManager.Regions[mainContentRegionName];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {

@@ -1,17 +1,14 @@
 
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using Prism.Regions;
-using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Contacts.Views
 {
-    [Export]
     [ViewSortHint("04")]
-    public partial class ContactsAvatarNavigationItemView : UserControl, IPartImportsSatisfiedNotification
+    public partial class ContactsAvatarNavigationItemView : UserControl
     {
         private const string mainContentRegionName = "MainContentRegion";
 
@@ -19,16 +16,14 @@ namespace ViewSwitchingNavigation.Contacts.Views
         // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
         private static Uri contactsAvatarsViewUri = new Uri("ContactsView?Show=Avatars", UriKind.Relative);
 
-        [Import]
-        public IRegionManager regionManager;
+        private IRegionManager regionManager;
 
-        public ContactsAvatarNavigationItemView()
+        public ContactsAvatarNavigationItemView(IRegionManager regionManager)
         {
+            this.regionManager = regionManager;
+
             InitializeComponent();
-        }
 
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
             IRegion mainContentRegion = this.regionManager.Regions[mainContentRegionName];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {

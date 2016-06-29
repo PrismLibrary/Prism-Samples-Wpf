@@ -1,22 +1,19 @@
 
 
-using System;
-using System.ComponentModel.Composition.Hosting;
 using System.Windows;
-using Prism.Mef;
+using Microsoft.Practices.Unity;
+using Prism.Unity;
 using Prism.Modularity;
 
 namespace ViewSwitchingNavigation
 {
-    public class QuickStartBootstrapper : MefBootstrapper
+    public class QuickStartBootstrapper : UnityBootstrapper
     {
-        private const string ModuleCatalogUri = "/ViewSwitchingNavigation;component/ModulesCatalog.xaml";
-
-        protected override void ConfigureAggregateCatalog()
+        protected override void ConfigureContainer()
         {
-            base.ConfigureAggregateCatalog();
+            base.ConfigureContainer();
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(QuickStartBootstrapper).Assembly));
+            this.Container.RegisterType<Shell>(new ContainerControlledLifetimeManager());
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -26,7 +23,7 @@ namespace ViewSwitchingNavigation
 
         protected override DependencyObject CreateShell()
         {
-            return this.Container.GetExportedValue<Shell>();
+            return this.Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()

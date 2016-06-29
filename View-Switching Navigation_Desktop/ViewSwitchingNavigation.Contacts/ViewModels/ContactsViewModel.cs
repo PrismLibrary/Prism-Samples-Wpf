@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -15,7 +14,6 @@ using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Contacts.ViewModels
 {
-    [Export]
     public class ContactsViewModel : BindableBase
     {
         private const string ComposeEmailViewName = "ComposeEmailView";
@@ -27,7 +25,6 @@ namespace ViewSwitchingNavigation.Contacts.ViewModels
         private readonly DelegateCommand<object> emailContactCommand;
         private readonly IContactsService contactsService;
 
-        [ImportingConstructor]
         public ContactsViewModel(IContactsService contactsService, IRegionManager regionManager)
         {
             this.contactsService = contactsService;

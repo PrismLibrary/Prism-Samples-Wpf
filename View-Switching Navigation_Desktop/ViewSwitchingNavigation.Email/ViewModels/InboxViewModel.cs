@@ -15,7 +15,6 @@ using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Email.ViewModels
 {
-    [Export]
     public class InboxViewModel : BindableBase
     {
         private const string ComposeEmailViewKey = "ComposeEmailView";
@@ -32,7 +31,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
 
         private static Uri ComposeEmailViewUri = new Uri(ComposeEmailViewKey, UriKind.Relative);
 
-        [ImportingConstructor]
         public InboxViewModel(IEmailService emailService, IRegionManager regionManager)
         {
             this.composeMessageCommand = new DelegateCommand<object>(this.ComposeMessage);
@@ -105,8 +103,6 @@ namespace ViewSwitchingNavigation.Email.ViewModels
                 parameters.Add(ReplyToKey, currentEmail.Id.ToString("N"));
                 this.regionManager.RequestNavigate(RegionNames.MainContentRegion, ComposeEmailViewKey + parameters);
             }
-
-            
         }
 
         private bool CanReplyMessage(object ignored)
