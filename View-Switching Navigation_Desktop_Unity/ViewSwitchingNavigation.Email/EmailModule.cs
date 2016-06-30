@@ -23,7 +23,7 @@ namespace ViewSwitchingNavigation.Email
         public void Initialize()
         {
             this.unityContainer.RegisterType<EmailNavigationItemView>();
-            this.unityContainer.RegisterType<IEmailService, EmailService>();
+            this.unityContainer.RegisterType<IEmailService, EmailService>(new ContainerControlledLifetimeManager());
 
             this.unityContainer.RegisterType<InboxView>();
             this.unityContainer.RegisterTypeForNavigation<InboxView>();
