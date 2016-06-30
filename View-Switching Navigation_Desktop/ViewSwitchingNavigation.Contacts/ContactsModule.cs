@@ -25,18 +25,18 @@ namespace ViewSwitchingNavigation.Contacts
         {
             this.unityContainer.RegisterType<IContactsService, ContactsService>(new ContainerControlledLifetimeManager());
 
-            this.unityContainer.RegisterType<ContactsViewModel>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<ContactsViewModel>();
 
-            this.unityContainer.RegisterType<ContactsAvatarNavigationItemView>(new ContainerControlledLifetimeManager());
-            this.unityContainer.RegisterType<ContactsDetailNavigationItemView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<ContactsAvatarNavigationItemView>();
+            this.unityContainer.RegisterType<ContactsDetailNavigationItemView>();
 
-            this.unityContainer.RegisterType<ContactsView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<ContactsView>();
             this.unityContainer.RegisterTypeForNavigation<ContactsView>();
 
-            this.unityContainer.RegisterType<ContactAvatarView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<ContactAvatarView>();
             this.unityContainer.RegisterTypeForNavigation<ContactAvatarView>();
 
-            this.unityContainer.RegisterType<ContactDetailView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<ContactDetailView>();
             this.unityContainer.RegisterTypeForNavigation<ContactDetailView>();
 
             // todo: 16 - Contacts with two 'views'

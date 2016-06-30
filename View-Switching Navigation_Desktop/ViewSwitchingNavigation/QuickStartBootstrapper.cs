@@ -9,13 +9,6 @@ namespace ViewSwitchingNavigation
 {
     public class QuickStartBootstrapper : UnityBootstrapper
     {
-        protected override void ConfigureContainer()
-        {
-            base.ConfigureContainer();
-
-            this.Container.RegisterType<Shell>(new ContainerControlledLifetimeManager());
-        }
-
         protected override IModuleCatalog CreateModuleCatalog()
         {
             return new ConfigurationModuleCatalog();

@@ -24,9 +24,9 @@ namespace ViewSwitchingNavigation.Calendar
         public void Initialize()
         {
             this.unityContainer.RegisterType<ICalendarService, CalendarService>(new ContainerControlledLifetimeManager());
-            this.unityContainer.RegisterType<CalendarViewModel>(new ContainerControlledLifetimeManager());
-            this.unityContainer.RegisterType<CalendarNavigationItemView>(new ContainerControlledLifetimeManager());
-            this.unityContainer.RegisterType<CalendarView>(new ContainerControlledLifetimeManager());
+            this.unityContainer.RegisterType<CalendarViewModel>();
+            this.unityContainer.RegisterType<CalendarNavigationItemView>();
+            this.unityContainer.RegisterType<CalendarView>();
 
             this.unityContainer.RegisterTypeForNavigation<CalendarView>();
 
