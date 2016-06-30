@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
 namespace ViewSwitchingNavigation.Contacts.Model
 {
+    [Export(typeof(IContactsService))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class ContactsService : IContactsService
     {
         private const string Avatar1Uri = @"/ViewSwitchingNavigation.Contacts;component/Avatars/MC900432625.PNG";

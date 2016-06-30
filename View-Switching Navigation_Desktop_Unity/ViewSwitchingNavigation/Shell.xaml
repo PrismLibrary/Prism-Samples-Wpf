@@ -1,0 +1,45 @@
+﻿<Window x:Class="ViewSwitchingNavigation.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls"
+    Title="View-Switching Navigation QuickStart"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot"
+          Background="{StaticResource MainBackground}">
+        <Grid MinWidth="300" MaxWidth="1000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Width="Auto" Text="View-Switching Navigation" FontWeight="Normal" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center"/>
+            </StackPanel>
+            <controls:InfoTipToggleButton Grid.Row="1">
+                <controls:InfoTipToggleButton.Popup>
+                    <Popup>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel MinWidth="100" MinHeight="24" MaxWidth="500" Background="White">
+                                <TextBlock TextWrapping="Wrap">This Navigation Quickstart demonstrates navigation within Prism's Regions to show new views, move between existing views, and how to pass context to views during navigaton.</TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </controls:InfoTipToggleButton.Popup>
+            </controls:InfoTipToggleButton>
+            <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="250" Margin="5,0,0,5">
+                <ItemsControl x:Name="NavigationItemsControl" prism:RegionManager.RegionName="MainNavigationRegion" Grid.Column="0" Margin="5" Padding="5" />
+            </Border>
+            <ContentControl prism:RegionManager.RegionName="MainContentRegion" 
+                        Grid.Column="1" Grid.Row="2" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Window>

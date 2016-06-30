@@ -1,6 +1,7 @@
 
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using Prism.Regions;
@@ -8,19 +9,22 @@ using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Email.Views
 {
+    [Export]
     [ViewSortHint("01")]
-    public partial class EmailNavigationItemView : UserControl
+    public partial class EmailNavigationItemView : UserControl, IPartImportsSatisfiedNotification
     {
         private static Uri emailsViewUri = new Uri("/InboxView", UriKind.Relative);
 
-        private IRegionManager regionManager;
+        [Import]
+        public IRegionManager regionManager;
 
-        public EmailNavigationItemView(IRegionManager regionManager)
+        public EmailNavigationItemView()
         {
-            this.regionManager = regionManager;
-
             InitializeComponent();
+        }
 
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
             IRegion mainContentRegion = this.regionManager.Regions[RegionNames.MainContentRegion];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {

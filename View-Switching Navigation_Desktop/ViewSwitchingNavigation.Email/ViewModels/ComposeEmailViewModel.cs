@@ -3,6 +3,7 @@ using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
@@ -18,6 +19,9 @@ namespace ViewSwitchingNavigation.Email.ViewModels
     // This option can be specified either using the RegionMemberLifetime
     // attribute, as shown here, or by implementing the 
     // IRegionMemberLifetime interface.
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    [RegionMemberLifetime(KeepAlive = false)]
     public class ComposeEmailViewModel : BindableBase, IConfirmNavigationRequest
     {
         private const string NormalStateKey = "Normal";
@@ -35,6 +39,7 @@ namespace ViewSwitchingNavigation.Email.ViewModels
         private string sendState;
         private IRegionNavigationJournal navigationJournal;
 
+        [ImportingConstructor]
         public ComposeEmailViewModel(IEmailService emailService)
         {
             this.sendEmailCommand = new DelegateCommand(this.SendEmail);

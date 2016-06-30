@@ -62,6 +62,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncResult.cs" />
     <Compile Include="DesignDataCollectionView.cs" />
     <Compile Include="ObjectToVisibilityConverter.cs" />
     <Compile Include="ObservableCommand.cs" />

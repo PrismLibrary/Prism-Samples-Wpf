@@ -34,6 +34,7 @@ namespace ViewSwitchingNavigation.Contacts.Tests
         public void WhenContactIsSelected_ThenEmailContactCommandIsEnabledAndNotifiesChange()
         {
             var contactsServiceMock = new Mock<IContactsService>();
+            AsyncCallback callback = null;
             var resultMock = new Mock<IAsyncResult>();
             IEnumerable<Contact> contacts = new[] { new Contact { }, new Contact { } };
             contactsServiceMock
@@ -56,6 +57,7 @@ namespace ViewSwitchingNavigation.Contacts.Tests
         public void WhenSendingEmail_ThenNavigatesWithAToQueryParameter()
         {
             var contactsServiceMock = new Mock<IContactsService>();
+            AsyncCallback callback = null;
             var resultMock = new Mock<IAsyncResult>();
             var contacts = new[] { new Contact { EmailAddress = "email" }, new Contact { } };
             contactsServiceMock

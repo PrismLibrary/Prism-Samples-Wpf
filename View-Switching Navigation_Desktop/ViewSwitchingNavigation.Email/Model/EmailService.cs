@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Email.Model
 {
+    [Export(typeof(IEmailService))]
     public class EmailService : IEmailService
     {
         private readonly List<EmailDocument> emailDocuments;

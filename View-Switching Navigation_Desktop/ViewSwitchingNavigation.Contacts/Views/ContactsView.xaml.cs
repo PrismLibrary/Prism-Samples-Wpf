@@ -1,6 +1,7 @@
 
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using System.Linq;
 using Prism.Regions;
@@ -8,6 +9,7 @@ using ViewSwitchingNavigation.Contacts.ViewModels;
 
 namespace ViewSwitchingNavigation.Contacts.Views
 {
+    [Export("ContactsView")]
     public partial class ContactsView : UserControl, INavigationAware
     {
         private const string ContactAvatarViewName = "ContactAvatarView";
@@ -15,17 +17,15 @@ namespace ViewSwitchingNavigation.Contacts.Views
         private const string ShowParameterName = "Show";
         private const string AvatarsValue = "Avatars";
 
-        private IRegionManager regionManager;
-
-        public ContactsView(IRegionManager regionManager, ContactsViewModel viewModel)
+        public ContactsView()
         {
-            this.regionManager = regionManager;
-
             InitializeComponent();
-
-            this.ViewModel = viewModel;
         }
 
+        [Import]
+        public IRegionManager regionManager;
+
+        [Import]
         public ContactsViewModel ViewModel
         {
             get

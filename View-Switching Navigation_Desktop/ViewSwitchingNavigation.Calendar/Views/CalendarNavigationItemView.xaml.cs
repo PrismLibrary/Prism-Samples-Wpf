@@ -1,6 +1,7 @@
 
 
 using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using Prism.Regions;
@@ -8,19 +9,22 @@ using ViewSwitchingNavigation.Infrastructure;
 
 namespace ViewSwitchingNavigation.Calendar.Views
 {
+    [Export]
     [ViewSortHint("02")]
-    public partial class CalendarNavigationItemView : UserControl
+    public partial class CalendarNavigationItemView : UserControl, IPartImportsSatisfiedNotification
     {
         private static Uri calendarViewUri = new Uri("CalendarView", UriKind.Relative);
 
-        private IRegionManager regionManager;
+        [Import]
+        public IRegionManager regionManager;
 
-        public CalendarNavigationItemView(IRegionManager regionManager)
+        public CalendarNavigationItemView()
         {
-            this.regionManager = regionManager;
-
             InitializeComponent();
+        }
 
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
             IRegion mainContentRegion = this.regionManager.Regions[RegionNames.MainContentRegion];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {

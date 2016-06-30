@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
 namespace ViewSwitchingNavigation.Calendar.Model
 {
+    [Export(typeof(ICalendarService))]
     public class CalendarService : ICalendarService
     {
         private readonly List<Meeting> meetings;

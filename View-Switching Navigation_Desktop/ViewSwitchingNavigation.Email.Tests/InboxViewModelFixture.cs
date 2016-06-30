@@ -55,6 +55,7 @@ namespace ViewSwitchingNavigation.Email.Tests
             EmailDocument[] emails = new EmailDocument[] { email };
 
             var emailServiceMock = new Mock<IEmailService>();
+            AsyncCallback callback = null;
             var asyncResultMock = new Mock<IAsyncResult>();
             emailServiceMock
                 .Setup(svc => svc.GetEmailDocumentsAsync())

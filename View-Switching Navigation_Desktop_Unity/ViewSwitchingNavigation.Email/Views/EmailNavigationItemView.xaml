@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Email.Views.EmailNavigationItemView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" 
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <RadioButton x:Name="NavigateToEmailRadioButton" GroupName="MainNavigation" Click="NavigateToEmailRadioButton_Click" Style="{StaticResource MainViewRadioButtonStyle}" AutomationProperties.AutomationId="EmailRadioButton">Mail</RadioButton>
+        <controls:InfoTipToggleButton Grid.Column="1">
+            <controls:InfoTipToggleButton.Popup>
+                <Popup>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel MinWidth="100" MinHeight="24" MaxWidth="400" Background="White">
+                            <TextBlock Margin="2" TextWrapping="Wrap">The view made visible by this button demonstrates supplying context for navigation and navigating to views that have not been registered previously with a region.</TextBlock>
+                            <TextBlock Margin="2" TextWrapping="Wrap">In this case, the context will be the selected email which is passed as part of the navigation Uri.</TextBlock>
+                            <TextBlock Margin="2" TextWrapping="Wrap">Many of the view models in this area also implement the INavigationAware to participate in the navigation.</TextBlock>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </controls:InfoTipToggleButton.Popup>
+        </controls:InfoTipToggleButton>
+    </Grid>
+</UserControl>
