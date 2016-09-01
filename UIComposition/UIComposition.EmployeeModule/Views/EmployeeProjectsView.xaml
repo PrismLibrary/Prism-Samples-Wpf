@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="UIComposition.EmployeeModule.Views.EmployeeProjectsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.Background>
+			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="#FF7B97D4" />
+				<GradientStop Color="#FF244C8D" Offset="1" />
+			</LinearGradientBrush>
+		</Grid.Background>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" Text="Employee Projects View" TextWrapping="Wrap" FontSize="18" Foreground="#FF2F3806" Margin="8" />
+
+		<StackPanel Grid.Row="1" Grid.Column="0" Margin="8">
+			<TextBlock Width="Auto" Height="Auto" Text="This employee works on the following projects:" FontWeight="Bold" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Top" />
+			<DataGrid AutomationProperties.AutomationId="ProjectsList" ItemsSource="{Binding Projects}" AutoGenerateColumns="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Project" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Role" Binding="{Binding Path=Role}" IsReadOnly="True" Width="*" />
+				</DataGrid.Columns>
+			</DataGrid>
+		</StackPanel>
+
+	</Grid>
+
+</UserControl>

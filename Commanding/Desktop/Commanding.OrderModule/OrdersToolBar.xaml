@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Commanding.Modules.Order.OrdersToolBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:inf="clr-namespace:Commanding.Modules.Order">
+
+    <ToolBar>
+        <Button AutomationProperties.AutomationId="SaveAllToolBarButton" Command="{x:Static inf:OrdersCommands.SaveAllOrdersCommand}">Save All Orders</Button>
+        <Separator />
+    </ToolBar>
+
+</UserControl>

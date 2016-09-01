@@ -1,0 +1,822 @@
+﻿<UserControl x:Class="StateBasedNavigation.Desktop.Views.ChatView"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+            xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+            xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+            xmlns:prism="http://www.codeplex.com/prism" 
+            xmlns:infra="clr-namespace:StateBasedNavigation.Desktop.Infrastructure" 
+            xmlns:vs="clr-namespace:StateBasedNavigation.Desktop.Views"
+            xmlns:cb="clr-namespace:StateBasedNavigation.Desktop.Infrastructure.Behaviors" 
+            xmlns:controls="clr-namespace:StateBasedNavigation.Desktop.Controls"
+            x:Name="userControl" 
+            mc:Ignorable="d"
+            d:DesignHeight="354" d:DesignWidth="595" >
+
+    <UserControl.Resources>
+        <infra:SizeToBooleanConverter x:Key="SizeToBooleanConverter"/>
+        <infra:SizeToVisibilityConverter x:Key="SizeToVisibilityConverter" />
+
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="ContactsList" TargetType="ListBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding PersonalMessage}" FontStyle="Italic"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItemStyle}"/>
+        </Style>
+
+        <Style x:Key="AvatarsList" TargetType="ListBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="10">
+                            <Image Margin="0,0,10,0" Width="75" Height="75" Source="{Binding AvatarUri}"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+
+        <DataTemplate x:Key="MessageNotificationTemplate">
+            <Border BorderThickness="2" BorderBrush="#FF4E80C4" Background="#FFECECEF" CornerRadius="3" IsHitTestVisible="False">
+                <StackPanel Orientation="Vertical" Width="230">
+                    <TextBlock><Run Text="Message from "/><Run Text="{Binding Contact.Name}"/><Run Text=":"/></TextBlock>
+                    <TextBlock><Run Text="{Binding Message, Mode=OneWay}" FontStyle="Italic"/></TextBlock>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <i:Interaction.Behaviors>
+            <ei:DataStateBehavior Binding="{Binding ShowDetails}" 
+                                  Value="True" 
+                                  TrueState="ShowDetails" FalseState="ShowContacts"/>
+            <ei:DataStateBehavior Binding="{Binding IsChecked, ElementName=ShowAsListButton}" 
+                                  Value="True" 
+                                  TrueState="ShowAsList" FalseState="ShowAsIcons"/>
+            <ei:DataStateBehavior Binding="{Binding ConnectionStatus}" 
+                                  Value="Available" 
+                                  TrueState="Available" FalseState="Unavailable"/>
+            <ei:DataStateBehavior Binding="{Binding SendingMessage}" 
+                                  Value="True" 
+                                  TrueState="SendingMessage" FalseState="NotSendingMessage"/>
+        </i:Interaction.Behaviors>
+
+        <i:Interaction.Triggers>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding SendMessageRequest}">
+                <prism:PopupWindowAction IsModal="True">
+                    <prism:PopupWindowAction.WindowContent>
+                        <vs:SendMessagePopupView />
+                    </prism:PopupWindowAction.WindowContent>
+                </prism:PopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding ShowReceivedMessageRequest}">
+                <cb:ShowNotificationAction TargetName="NotificationList" />
+            </prism:InteractionRequestTrigger>
+
+        </i:Interaction.Triggers>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="VisualizationStates">
+
+                <VisualStateGroup.Transitions>
+
+                    <VisualTransition From="ShowAsIcons" To="ShowAsList">
+                        <Storyboard SpeedRatio="2">
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Angle" Storyboard.TargetName="rotate">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="360"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="270"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Avatars">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" >
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Contacts">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+
+                    <VisualTransition From="ShowAsList" To="ShowAsIcons">
+                        <Storyboard SpeedRatio="2">
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Angle" Storyboard.TargetName="rotate">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="360"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="270"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Contacts">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" >
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Avatars">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+
+                </VisualStateGroup.Transitions>
+
+                <VisualState x:Name="ShowAsList">
+                    <Storyboard>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Contacts">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="ShowAsIcons">
+                    <Storyboard>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Visibility)" Storyboard.TargetName="Avatars">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="DetailStates">
+
+                <VisualStateGroup.Transitions>
+
+                    <VisualTransition From="ShowContacts" To="ShowDetails">
+                        <Storyboard SpeedRatio="2">
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Angle" Storyboard.TargetName="rotate">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="360"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="270"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Details">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+
+                    <VisualTransition From="ShowDetails" To="ShowContacts">
+                        <Storyboard SpeedRatio="2">
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Angle" Storyboard.TargetName="rotate">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="360"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="270"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Details">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinnerBackground">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="spinner">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+
+                </VisualStateGroup.Transitions>
+
+                <VisualState x:Name="ShowContacts">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Details">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="ShowDetails">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Details">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="StatusStates">
+                <VisualState x:Name="Available"/>
+
+                <VisualState x:Name="Unavailable">
+                    <Storyboard>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="MainPane">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="OfflineMask">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="ProgressStates">
+                <VisualState x:Name="NotSendingMessage"/>
+
+                <VisualState x:Name="SendingMessage">
+                    <Storyboard>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="SendingMessageIndicator">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
+        </VisualStateManager.VisualStateGroups>
+
+        <Border x:Name="ContainerPane" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"
+                BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="2" Margin="2,2,2,0">
+
+            <!--<Border.Projection>
+                <PlaneProjection/>
+            </Border.Projection>-->
+
+            <Grid Margin="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Status -->
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox x:Name="comboBox" 
+                      SelectedValue="{Binding ConnectionStatus, Mode=TwoWay}"
+                      SelectedValuePath="Content"
+                      HorizontalAlignment="Stretch" Padding="10,3" Margin="0">
+                        <ComboBoxItem>Available</ComboBoxItem>
+                        <ComboBoxItem>Unavailable</ComboBoxItem>
+                    </ComboBox>
+
+                    <controls:InfoTipToggleButton Grid.Column="1">
+                        <controls:InfoTipToggleButton.Popup>
+                            <Popup>
+                                <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                    <StackPanel MaxWidth="400" Margin="5">
+                                        <TextBlock TextWrapping="Wrap">
+                                This combo box is bound to the ConnectionStatus property on the view model. 
+                                This property can be changed from the combo box but it can also be changed
+                                by random disconnections originated in the chat service.
+                                        </TextBlock>
+                                        <TextBlock TextWrapping="Wrap">
+                                A connecton status of "Unavailable" causes a transition to the 'Unavailable' visual
+                                state on the 'StatusStates' visual state group, causing the view to be disabled except
+                                for this combo box.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </controls:InfoTipToggleButton.Popup>
+                    </controls:InfoTipToggleButton>
+                </Grid>
+
+                <ContentControl x:Name="MainPane" Grid.Row="2"
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" >
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Buttons -->
+
+                        <Grid x:Name="ButtonsPanel" Grid.Row="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton AutomationProperties.AutomationId="ListButton" x:Name="ShowAsListButton" IsChecked="True"
+                                         Grid.Column="0"
+                                         Padding="10,3" Content="List">
+                            </RadioButton>
+
+                            <controls:InfoTipToggleButton Grid.Column="1">
+                                <controls:InfoTipToggleButton.Popup>
+                                    <Popup>
+                                        <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                            <StackPanel MaxWidth="400" Margin="5">
+                                                <TextBlock TextWrapping="Wrap">
+                                        This is a radio button styled as a toggle button. Checking it 
+                                        sets the visualization mode to "list of contacts", as defined 
+                                        by the 'ShowAsList' visual state. Transitions to this state
+                                        are implemented with a flip visual effect.
+                                                </TextBlock>
+                                                <TextBlock TextWrapping="Wrap">
+                                        This radio button is not backed by a property in the view model:
+                                        the visualization mode is an implementation detail of the UI.
+                                        Visual state transitions for the visualization mode are triggered
+                                        by changes on the controls themselves through triggers.
+                                                </TextBlock>
+                                                <TextBlock TextWrapping="Wrap">
+                                        Each visualization mode defines its own ListBox control. Changing
+                                        the style on a single, shared ListBox control is not possible
+                                        because the chosen visualization modes require the use of 
+                                        different panels, which cannot be changed once a list box has
+                                        been shown. These two controls share a collection view, so selections
+                                        are shared among them.
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                </controls:InfoTipToggleButton.Popup>
+                            </controls:InfoTipToggleButton>
+
+                            <RadioButton AutomationProperties.AutomationId="AvatarButton" x:Name="ShowAsIconsButton" 
+                                         Grid.Column="3"
+                                         Padding="10,3" Content="Icons">
+                            </RadioButton>
+
+                            <controls:InfoTipToggleButton Grid.Column="4">
+                                <controls:InfoTipToggleButton.Popup>
+                                    <Popup>
+                                        <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                            <StackPanel MaxWidth="400" Margin="5">
+                                                <TextBlock TextWrapping="Wrap">
+                                    This is a radio button styled as a toggle button. Checking it 
+                                    sets the visualization mode to "avatars", as defined 
+                                    by the 'ShowAsIcons' visual state. Transitions to this state
+                                    are implemented with a flip visual effect.
+                                                </TextBlock>
+                                                <TextBlock TextWrapping="Wrap">
+                                    This radio button is not backed by a property in the view model:
+                                    the visualization mode is an implementation detail of the UI.
+                                    Visual state transitions for the visualization mode are triggered
+                                    by changes on the controls themselves through triggers.
+                                                </TextBlock>
+                                                <TextBlock TextWrapping="Wrap">
+                                    Each visualization mode defines its own ListBox control. Changing
+                                    the style on a single, shared ListBox control is not possible
+                                    because the chosen visualization modes require the use of 
+                                    different panels, which cannot be changed once a list box has
+                                    been shown. These two controls share a collection view, so selections
+                                    are shared among them.
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                </controls:InfoTipToggleButton.Popup>
+                            </controls:InfoTipToggleButton>
+
+                            <Button x:Name="ShowDetailsButton"
+                                    Grid.Column="6"
+                                    Padding="10,3" Content="Details"
+                                    Command="{Binding ShowDetailsCommand}"
+                                    HorizontalContentAlignment="Left"
+                                    HorizontalAlignment="Stretch" >
+                                <Button.CommandParameter>
+                                    <sys:Boolean>True</sys:Boolean>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <controls:InfoTipToggleButton Grid.Column="7">
+                                <controls:InfoTipToggleButton.Popup>
+                                    <Popup>
+                                        <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                            <StackPanel MaxWidth="400" Margin="5">
+                                                <TextBlock TextWrapping="Wrap">
+                                        This button uses the ShowDetailsCommand, which is only available
+                                        when a contact has been selected. Executing the command sets
+                                        one of the 'ShowDetails' and 'ShowContacts' visual states.
+                                        Transitions to this state are implemented with a flip visual effect.
+                                                </TextBlock>
+                                                <TextBlock TextWrapping="Wrap">
+                                        Visual state transitions for the detail visualization mode are 
+                                        triggered by changes in the view model.
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                </controls:InfoTipToggleButton.Popup>
+                            </controls:InfoTipToggleButton >
+                        </Grid>
+
+                        <!-- Contacts view-->
+
+                        <ListBox x:Name="Contacts"
+                             ItemsSource="{Binding ContactsView}"
+                             Style="{Binding Source={StaticResource ContactsList}}"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.RowSpan="3" Visibility="Collapsed"/>
+
+                        <!-- Avatars view-->
+
+                        <ListBox x:Name="Avatars"
+                             ItemsSource="{Binding ContactsView}"
+                             Style="{Binding Source={StaticResource AvatarsList}}"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"  Grid.RowSpan="3" Visibility="Collapsed"
+                             AutomationProperties.AutomationId="AvatarsView"/>
+
+                        <!-- Details view -->
+
+                        <Grid x:Name="Details"
+                              Background="White" Visibility="Collapsed"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="5">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0">
+                                <Label.Content>
+                                    <TextBlock AutomationProperties.AutomationId="DetailsHeading">
+                                        <Run Text="Details for "/>
+                                        <Run Text="{Binding CurrentContact.Name}"/>
+                                    </TextBlock>
+                                </Label.Content>
+                            </Label>
+
+                            <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" >
+                                <TextBlock Text="{Binding CurrentContact.PersonalMessage}" FontStyle="Italic"/>
+                            </Label>
+
+                            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="SendMessageButton" Grid.Column="0" Grid.Row="0" Margin="4" VerticalAlignment="Center"
+                                    AutomationProperties.AutomationId="SendMessageButton">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <ei:CallMethodAction TargetObject="{Binding DataContext, ElementName=userControl}"
+                                                                 MethodName="SendMessage"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    Send Message
+                                </Button>
+                                <controls:InfoTipToggleButton VerticalAlignment="Center"
+                                              Grid.Column="1" Grid.Row="0" Margin="4">
+                                    <controls:InfoTipToggleButton.Popup>
+                                        <Popup>
+                                            <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                                <StackPanel MaxWidth="400" Margin="5">
+                                                    <TextBlock TextWrapping="Wrap">
+                                        This button executes the SendMessage method on the view model,
+                                        and is only enabled when no other message is being sent. Executing 
+                                        the method causes a popup window to be opened to capture the 
+                                        message to send. Accepting the message causes the view model
+                                        to send the message to the chat service, which in turns
+                                        causes an update on the view model that is represented by showing
+                                        a progress bar until a confirmation that the message has been sent
+                                        is issued by the chat service.
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
+                                    </controls:InfoTipToggleButton.Popup>
+                                </controls:InfoTipToggleButton>
+
+                                <Button Grid.Column="0" Grid.Row="1" Margin="4" Command="{Binding ShowDetailsCommand}" VerticalAlignment="Center">
+                                    <Button.CommandParameter>
+                                        <sys:Boolean>False</sys:Boolean>
+                                    </Button.CommandParameter>
+                                    Go Back
+                                </Button>
+                                <controls:InfoTipToggleButton  VerticalAlignment="Center"
+                                              Grid.Column="1" Grid.Row="1" Margin="4">
+                                    <controls:InfoTipToggleButton.Popup>
+                                        <Popup>
+                                            <Border BorderBrush="Black" BorderThickness="2" Background="White">
+                                                <StackPanel MaxWidth="400" Margin="5">
+                                                    <TextBlock TextWrapping="Wrap">
+                                        This button uses the ShowDetailsCommand, which is only available
+                                        when a contact has been selected. Executing the command sets
+                                        one of the 'ShowDetails' and 'ShowContacts' visual states.
+                                        Transitions to this state are implemented with a flip visual effect.
+                                                    </TextBlock>
+                                                    <TextBlock TextWrapping="Wrap">
+                                        Visual state transitions for the detail visualization mode are 
+                                        triggered by changes in the view model.
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
+                                    </controls:InfoTipToggleButton.Popup>
+                                </controls:InfoTipToggleButton >
+                            </Grid>
+
+                            <Image Grid.Row="2" Grid.ColumnSpan="2" Source="{Binding CurrentContact.AvatarUri}"
+                                   Width="300" Height="300"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   AutomationProperties.AutomationId="ContactImage"/>
+
+                        </Grid>
+                    </Grid>
+                </ContentControl>
+
+                <Border x:Name="OfflineMask" Grid.Row="2" BorderThickness="0" CornerRadius="2"
+                        Opacity="0.95" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFA1BED2" Offset="0" />
+                            <GradientStop Color="#4A88B1CC" Offset="1" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                    <Border BorderThickness="4" BorderBrush="{StaticResource PrimaryBrush}" CornerRadius="10"
+                            Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="220" Background="White">
+                        <Image Source="/StateBasedNavigation.Desktop;component/Images/disconnect.png" Margin="10" AutomationProperties.AutomationId="DisconnectedImage"/>
+                    </Border>
+                </Border>
+
+            </Grid>
+        </Border>
+
+        <Rectangle x:Name="spinnerBackground" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2,2,2,0" Fill="White" />
+
+        <Viewport3D x:Name="spinner" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2,2,2,0">
+            <Viewport3D.Camera>
+                <PerspectiveCamera x:Name="camera" Position="0,0,0.5" LookDirection="0,0,-1" FieldOfView="90" />
+            </Viewport3D.Camera>
+            <Viewport3D.Children>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <DirectionalLight Color="#444" Direction="0,0,-1" />
+                            <AmbientLight Color="#BBB" />
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <GeometryModel3D>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D  TriangleIndices="0,1,2 2,3,0" TextureCoordinates="0,1 1,1 1,0 0,0" Positions="-0.5,-0.5,0 0.5,-0.5,0 0.5,0.5,0 -0.5,0.5,0" />
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <DiffuseMaterial>
+                                    <DiffuseMaterial.Brush>
+                                        <VisualBrush Visual="{Binding ElementName=ContainerPane}" Stretch="Uniform" />
+                                    </DiffuseMaterial.Brush>
+                                </DiffuseMaterial>
+                            </GeometryModel3D.Material>
+                            <GeometryModel3D.Transform>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D x:Name="rotate" Axis="0,3,0" Angle="0" />
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </GeometryModel3D.Transform>
+                        </GeometryModel3D>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D.Children>
+        </Viewport3D>
+
+        <Grid x:Name="NotificationList" 
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom"
+              Visibility="{Binding Count, Converter={StaticResource SizeToVisibilityConverter}, Mode=OneWay, FallbackValue=Collapsed}">
+            <ItemsControl ItemTemplate="{StaticResource MessageNotificationTemplate}" ItemsSource="{Binding}" />
+        </Grid>
+
+        <controls:BusyIndicator x:Name="SendingMessageIndicator" Visibility="Collapsed">
+        </controls:BusyIndicator>
+
+    </Grid>
+</UserControl>

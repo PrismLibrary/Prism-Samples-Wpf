@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="StateBasedNavigation.Desktop.Views.SendMessagePopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinWidth="300" MinHeight="120" AutomationProperties.AutomationId="SendMessageChildWindow">
+    <Grid x:Name="LayoutRoot" Margin="2">
+
+        <ContentControl 
+            x:Name="UserInput"
+            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
+            <Grid Margin="12,12,12,12" >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox Text="{Binding Message, Mode=TwoWay}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutomationProperties.AutomationId="TextBoxMessage"/>
+
+                <Button AutomationProperties.AutomationId="SendMessageCancelButton" x:Name="CancelButton" Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1" Command="{Binding CancelCommand}" />
+                <Button AutomationProperties.AutomationId="SendMessageOkButton" x:Name="OKButton" Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1" Command="{Binding OKCommand}" />
+            </Grid>
+        </ContentControl>
+
+    </Grid>
+</UserControl>
