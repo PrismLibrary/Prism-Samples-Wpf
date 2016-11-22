@@ -75,7 +75,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Notifications\ItemSelectionNotification.cs" />
     <Compile Include="ViewModels\InvokeCommandActionViewModel.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModel.cs" />
     <Compile Include="ViewModels\InteractionRequestViewModel.cs" />
