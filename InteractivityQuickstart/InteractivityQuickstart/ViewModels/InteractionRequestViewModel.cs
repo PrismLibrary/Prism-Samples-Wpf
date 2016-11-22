@@ -1,4 +1,3 @@
-using InteractivityQuickstart.Notifications;
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
@@ -19,7 +18,7 @@ namespace InteractivityQuickstart.ViewModels
             this.ConfirmationRequest = new InteractionRequest<IConfirmation>();
             this.NotificationRequest = new InteractionRequest<INotification>();
             this.CustomPopupViewRequest = new InteractionRequest<INotification>();
-            this.ItemSelectionRequest = new InteractionRequest<ItemSelectionNotification>();
+            this.ItemSelectionRequest = new InteractionRequest<ItemSelectionViewModel>();
 
             // Commands for each of the buttons. Each of these raise a different interaction request.
             this.RaiseConfirmationCommand = new DelegateCommand(this.RaiseConfirmation);
@@ -47,7 +46,7 @@ namespace InteractivityQuickstart.ViewModels
 
         public InteractionRequest<INotification> CustomPopupViewRequest { get; private set; }
 
-        public InteractionRequest<ItemSelectionNotification> ItemSelectionRequest { get; private set; }
+        public InteractionRequest<ItemSelectionViewModel> ItemSelectionRequest { get; private set; }
 
         public ICommand RaiseConfirmationCommand { get; private set; }
 
@@ -93,7 +92,7 @@ namespace InteractivityQuickstart.ViewModels
         {
             // Here we have a custom implementation of INotification which allows us to pass custom data in the 
             // parameter of the interaction request. In this case, we are passing a list of items.
-            ItemSelectionNotification notification = new ItemSelectionNotification();
+            ItemSelectionViewModel notification = new ItemSelectionViewModel();
             notification.Items.Add("Item1");
             notification.Items.Add("Item2");
             notification.Items.Add("Item3");

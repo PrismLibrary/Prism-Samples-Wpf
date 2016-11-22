@@ -1,44 +1,30 @@
-using InteractivityQuickstart.Notifications;
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 using System;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace InteractivityQuickstart.ViewModels
 {
-    public class ItemSelectionViewModel : BindableBase, IInteractionRequestAware
+    public class ItemSelectionViewModel : BindableBase, IInteractionRequestAware, IConfirmation
     {
-        private ItemSelectionNotification notification;
-
         public ItemSelectionViewModel()
         {
+            this.Items = new List<string>();
+            this.SelectedItem = null;
+
             this.SelectItemCommand = new DelegateCommand(this.AcceptSelectedItem);
             this.CancelCommand = new DelegateCommand(this.CancelInteraction);
         }
+
+        public IList<string> Items { get; private set; }
 
         // Both the FinishInteraction and Notification properties will be set by the PopupWindowAction
         // when the popup is shown.
         public Action FinishInteraction { get; set; }
 
-        public INotification Notification 
-        {
-            get
-            {
-                return this.notification;
-            }
-            set
-            {
-                if (value is ItemSelectionNotification)
-                {
-                    // To keep the code simple, this is the only property where we are raising the PropertyChanged event,
-                    // as it's required to update the bindings when this property is populated.
-                    // Usually you would want to raise this event for other properties too.
-                    this.notification = value as ItemSelectionNotification;
-                    this.OnPropertyChanged(() => this.Notification);
-                }
-            }
-        }
+        public INotification Notification { get; set; } // not needed but required by interface
 
         public string SelectedItem { get; set; }
 
@@ -46,24 +32,24 @@ namespace InteractivityQuickstart.ViewModels
 
         public ICommand CancelCommand { get; private set; }
 
+        public bool Confirmed { get; set; }
+
+        public string Title { get; set; }
+
+        public object Content { get; set; } // not needed but required by interface
+
         public void AcceptSelectedItem()
         {
-            if (this.notification != null)
-            {
-                this.notification.SelectedItem = this.SelectedItem;
-                this.notification.Confirmed = true;
-            }
+            this.SelectedItem = this.SelectedItem;
+            this.Confirmed = true;
 
             this.FinishInteraction();
         }
 
         public void CancelInteraction()
         {
-            if (this.notification != null)
-            {
-                this.notification.SelectedItem = null;
-                this.notification.Confirmed = false;
-            }
+            this.SelectedItem = null;
+            this.Confirmed = false;
 
             this.FinishInteraction();
         }
