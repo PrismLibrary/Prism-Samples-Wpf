@@ -12,13 +12,13 @@ Samples that demonstrate how to use various Prism features with WPF.
 | [Modules with App.config][7] | Load modules using an App.config file |
 | [Modules with Code][8] | Load modules using code |
 | [Modules with Directory][9] | Load modules form a directory |
-| [Moduels loded manually][10] | Load modules manually using the IModuleManager |
+| [Modules loded manually][10] | Load modules manually using the IModuleManager |
 | [ViewModelLocator][11] | using the ViewModelLocator |
 | [ViewModelLocator - Change Convention][12] | Change the ViewModelLocator naming conventions |
 | [ViewModelLocator - Custom Registrations][13] | Manually register ViewModels for specific views |
 | [DelegateCommand][14] | Use DelegateCommand and `DelegateCommand<T>` |
 | [CompositeCommands][15] | Learn how to use CompsoeCommands to invoke multiple commands as a single command |
-| [IActiveAware Commands][16] | | Make your commands IActiveAware to invoke only the active command |
+| [IActiveAware Commands][16] | Make your commands IActiveAware to invoke only the active command |
 | [Event Aggregator][17] | Using the IEventAggregator |
 | [Event Aggregator - Filter Events][18] | Filtering events when subscribing to events |
 | [RegionContext][19] | Pass data to nested regions using the RegionContext |
