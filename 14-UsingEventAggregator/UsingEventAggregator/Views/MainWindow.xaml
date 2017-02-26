@@ -1,0 +1,15 @@
+﻿<Window x:Class="UsingEventAggregator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ContentControl prism:RegionManager.RegionName="LeftRegion" />
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="RightRegion" />
+    </Grid>
+</Window>

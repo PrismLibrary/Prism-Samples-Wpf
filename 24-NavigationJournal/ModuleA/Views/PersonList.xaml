@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="ModuleA.Views.PersonList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid x:Name="LayoutRoot" Background="White" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="_listOfPeople" ItemsSource="{Binding People}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <prism:InvokeCommandAction Command="{Binding PersonSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfPeople}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        <Button Command="{Binding GoForwardCommand}" Grid.Row="1" Margin="10" Width="75">Go Forward</Button>
+    </Grid>
+</UserControl>

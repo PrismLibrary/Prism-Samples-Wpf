@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="ModuleB.Views.MessageList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True" Padding="25">
+    <Grid>
+        <ListBox ItemsSource="{Binding Messages}" />
+    </Grid>
+</UserControl>

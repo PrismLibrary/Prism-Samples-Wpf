@@ -1,0 +1,22 @@
+﻿<Window x:Class="UsingPopupWindowAction.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="350" Width="525">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel>
+        <Button Margin="5" Content="Raise Default Notification" Command="{Binding NotificationCommand}" />
+        <Button Margin="5" Content="Raise Default Confirmation" Command="{Binding ConfirmationCommand}"/>
+
+        <TextBlock Text="{Binding Title}" Margin="25" HorizontalAlignment="Center" FontSize="24" />
+    </StackPanel>
+</Window>
