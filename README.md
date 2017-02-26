@@ -1,5 +1,5 @@
 # Prism Samples WPF
-Samples that demonstrate how to use various Prism features with WPF.
+Samples that demonstrate how to use various Prism features with WPF.  If you are just getting started with Prism, it is recommended that you start from the first sample, and work your way down the list sequentially (in order). Each sample builds on the previous sample's concept.
 
 | Topic | Description |
 -----------|-------------|
