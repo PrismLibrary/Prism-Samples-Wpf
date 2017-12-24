@@ -40,9 +40,9 @@ namespace UsingDelegateCommands.ViewModels
 
             DelegateCommandObservesProperty = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => IsEnabled);
 
-            DelegateCommandObservesCanExecute = new DelegateCommand(Execute).ObservesCanExecute((vm) => IsEnabled);
+            DelegateCommandObservesCanExecute = new DelegateCommand(Execute).ObservesCanExecute(() => IsEnabled);
 
-            ExecuteGenericDelegateCommand = new DelegateCommand<string>(ExecuteGeneric).ObservesCanExecute((vm) => IsEnabled);
+            ExecuteGenericDelegateCommand = new DelegateCommand<string>(ExecuteGeneric).ObservesCanExecute(() => IsEnabled);
         }
 
         private void Execute()

@@ -36,7 +36,7 @@ namespace ModuleA.ViewModels
         {
             _applicationCommands = applicationCommands;
 
-            UpdateCommand = new DelegateCommand(Update).ObservesCanExecute((vm) => CanUpdate);
+            UpdateCommand = new DelegateCommand(Update).ObservesCanExecute(() => CanUpdate);
 
             _applicationCommands.SaveCommand.RegisterCommand(UpdateCommand);
         }
