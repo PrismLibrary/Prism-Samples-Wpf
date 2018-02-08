@@ -37,18 +37,18 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
 | [Interactivity - InvokeCommandAction][32] | Invoke commands in response to any event |
 
 
-[1]: 1-BootstrapperShell/
-[2]: 2-Regions/
-[3]: 3-CustomRegions/
-[4]: 4-ViewDiscovery/
-[5]: 5-ViewInjection/
-[6]: 6-ViewActivationDeactivation/
-[7]: 7-Modules%20-%20AppConfig/
-[8]: 7-Modules%20-%20Code/
-[9]: 7-Modules%20-%20Directory/
-[10]: 7-Modules%20-%20LoadManual/
-[11]: 8-ViewModelLocator/
-[12]: 9-ChangeConvention/
+[1]: 01-BootstrapperShell/
+[2]: 02-Regions/
+[3]: 03-CustomRegions/
+[4]: 04-ViewDiscovery/
+[5]: 05-ViewInjection/
+[6]: 06-ViewActivationDeactivation/
+[7]: 07-Modules%20-%20AppConfig/
+[8]: 07-Modules%20-%20Code/
+[9]: 07-Modules%20-%20Directory/
+[10]: 07-Modules%20-%20LoadManual/
+[11]: 08-ViewModelLocator/
+[12]: 09-ChangeConvention/
 [13]: 10-CustomRegistrations/
 [14]: 11-UsingDelegateCommands/
 [15]: 12-UsingCompositeCommands/
