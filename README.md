@@ -11,7 +11,7 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
 | [View Activation/Deactivation][6] | Manually activate and deactivate views |
 | [Modules with App.config][7] | Load modules using an App.config file |
 | [Modules with Code][8] | Load modules using code |
-| [Modules with Directory][9] | Load modules form a directory |
+| [Modules with Directory][9] | Load modules from a directory |
 | [Modules loded manually][10] | Load modules manually using the IModuleManager |
 | [ViewModelLocator][11] | using the ViewModelLocator |
 | [ViewModelLocator - Change Convention][12] | Change the ViewModelLocator naming conventions |
