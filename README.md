@@ -28,7 +28,7 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
 | [Navigate to existing Views][23] | Control view instances during navigation |
 | [Passing Parameters][24] | Pass parameters from View/ViewModel to another View/ViewModel |
 | [Confirm/cancel Navigation][25] | Use the IConfirmNavigationReqest interface to confirm or cancel navigation |
-| [Controllng View lifetime][26] | Automatically remove views from memory with IRegionMemberLifetime |
+| [Controlling View lifetime][26] | Automatically remove views from memory with IRegionMemberLifetime |
 | [Navigation Journal][27] | Learn how to use the Navigation Journal |
 | [Interactivity - NotificationRequest][28] | Learn how to show popups using an InteractionRequest |
 | [Interactivity - ConfirmationRequest][29] | Learn how to prompt a confirmation dialog using a ConfirmationRequest |
