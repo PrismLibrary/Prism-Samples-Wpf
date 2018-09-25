@@ -1,6 +1,7 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Unity;
 using Prism.Regions;
 using System.Windows;
+using Prism.Ioc;
 
 namespace ActivationDeactivation.Views
 {
@@ -9,14 +10,14 @@ namespace ActivationDeactivation.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        IUnityContainer _container;
+        IContainerExtension _container;
         IRegionManager _regionManager;
         IRegion _region;
 
         ViewA _viewA;
         ViewB _viewB;
 
-        public MainWindow(IUnityContainer container, IRegionManager regionManager)
+        public MainWindow(IContainerExtension container, IRegionManager regionManager)
         {
             InitializeComponent();
             _container = container;
