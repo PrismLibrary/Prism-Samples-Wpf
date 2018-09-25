@@ -1,8 +1,9 @@
-﻿<Application x:Class="UsingEventAggregator.App"
+﻿<prism:PrismApplication x:Class="UsingEventAggregator.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:UsingEventAggregator">
     <Application.Resources>
          
     </Application.Resources>
-</Application>
+</prism:PrismApplication>
