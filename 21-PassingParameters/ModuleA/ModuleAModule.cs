@@ -1,28 +1,21 @@
-﻿using Microsoft.Practices.Unity;
-using ModuleA.Views;
+﻿using ModuleA.Views;
+using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
-using Prism.Unity;
-using System;
 
 namespace ModuleA
 {
     public class ModuleAModule : IModule
     {
-        IRegionManager _regionManager;
-        IUnityContainer _container;
-
-        public ModuleAModule(RegionManager regionManager, IUnityContainer container)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager = regionManager;
-            _container = container;
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(PersonList));            
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            _regionManager.RegisterViewWithRegion("ContentRegion", typeof(PersonList));
-
-            _container.RegisterTypeForNavigation<PersonDetail>();
+            containerRegistry.RegisterForNavigation<PersonDetail>();
         }
     }
 }
