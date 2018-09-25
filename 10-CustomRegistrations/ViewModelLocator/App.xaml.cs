@@ -1,24 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Prism.Ioc;
+using Prism.Mvvm;
+using Prism.Unity;
 using System.Windows;
+using ViewModelLocator.ViewModels;
+using ViewModelLocator.Views;
 
 namespace ViewModelLocator
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override Window CreateShell()
         {
-            base.OnStartup(e);
+            return Container.Resolve<MainWindow>();
+        }
 
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Run();
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            
+        }
+
+        protected override void ConfigureViewModelLocator()
+        {
+            base.ConfigureViewModelLocator();
+
+            // type / type
+            //ViewModelLocationProvider.Register(typeof(MainWindow).ToString(), typeof(CustomViewModel));
+
+            // type / factory
+            //ViewModelLocationProvider.Register(typeof(MainWindow).ToString(), () => Container.Resolve<CustomViewModel>());
+
+            // generic factory
+            //ViewModelLocationProvider.Register<MainWindow>(() => Container.Resolve<CustomViewModel>());
+
+            // generic type
+            ViewModelLocationProvider.Register<MainWindow, CustomViewModel>();
         }
     }
 }
