@@ -1,39 +1,34 @@
-﻿using Microsoft.Practices.Unity;
-using ModuleA.ViewModels;
+﻿using ModuleA.ViewModels;
 using ModuleA.Views;
+using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
-using System;
 
 namespace ModuleA
 {
     public class ModuleAModule : IModule
     {
-        IRegionManager _regionManager;
-        IUnityContainer _container;
-
-        public ModuleAModule(RegionManager regionManager, IUnityContainer container)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager = regionManager;
-            _container = container;
-        }
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            IRegion region = regionManager.Regions["ContentRegion"];
 
-        public void Initialize()
-        {
-            IRegion region = _regionManager.Regions["ContentRegion"];
-
-            var tabA = _container.Resolve<TabView>();
+            var tabA = containerProvider.Resolve<TabView>();
             SetTitle(tabA, "Tab A");
             region.Add(tabA);
 
-            var tabB = _container.Resolve<TabView>();
+            var tabB = containerProvider.Resolve<TabView>();
             SetTitle(tabB, "Tab B");
             region.Add(tabB);
 
-            var tabC = _container.Resolve<TabView>();
+            var tabC = containerProvider.Resolve<TabView>();
             SetTitle(tabC, "Tab C");
             region.Add(tabC);
+        }
 
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            
         }
 
         void SetTitle(TabView tab, string title)
