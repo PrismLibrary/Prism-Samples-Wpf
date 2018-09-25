@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Prism.Ioc;
 using Prism.Regions;
 using System.Windows;
 
@@ -9,10 +9,10 @@ namespace ViewInjection.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        IUnityContainer _container;
+        IContainerExtension _container;
         IRegionManager _regionManager;
 
-        public MainWindow(IUnityContainer container, IRegionManager regionManager)
+        public MainWindow(IContainerExtension container, IRegionManager regionManager)
         {
             InitializeComponent();
             _container = container;

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Regions.Prism
+namespace Regions
 {
     public class StackPanelRegionAdapter : RegionAdapterBase<StackPanel>
     {

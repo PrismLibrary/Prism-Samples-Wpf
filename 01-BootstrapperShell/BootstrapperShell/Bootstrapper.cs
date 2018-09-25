@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Unity;
 using Prism.Unity;
 using BootstrapperShell.Views;
 using System.Windows;
