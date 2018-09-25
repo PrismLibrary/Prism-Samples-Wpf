@@ -1,24 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Unity;
+using UsingEventAggregator.Views;
 
 namespace UsingEventAggregator
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override Window CreateShell()
         {
-            base.OnStartup(e);
+            return Container.Resolve<MainWindow>();
+        }
 
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Run();
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<ModuleA.ModuleAModule>();
+            moduleCatalog.AddModule<ModuleB.ModuleBModule>();
         }
     }
 }
