@@ -1,4 +1,5 @@
 ﻿using ModuleB.Views;
+using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
@@ -6,16 +7,15 @@ namespace ModuleB
 {
     public class ModuleBModule : IModule
     {
-        IRegionManager _regionManager;
-
-        public ModuleBModule(RegionManager regionManager)
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager = regionManager;
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("RightRegion", typeof(MessageList));
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            _regionManager.RegisterViewWithRegion("RightRegion", typeof(MessageList));
+            
         }
     }
 }

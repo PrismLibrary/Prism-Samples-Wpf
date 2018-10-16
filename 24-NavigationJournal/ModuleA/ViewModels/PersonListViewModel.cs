@@ -23,7 +23,7 @@ namespace ModuleA.ViewModels
 
         public DelegateCommand GoForwardCommand { get; set; }
 
-        public PersonListViewModel(RegionManager regionManager)
+        public PersonListViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 

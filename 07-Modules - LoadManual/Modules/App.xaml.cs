@@ -1,24 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using ModuleA;
+using Modules.Views;
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Unity;
 
 namespace Modules
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override Window CreateShell()
         {
-            base.OnStartup(e);
+            return Container.Resolve<MainWindow>();
+        }
 
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Run();
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            var moduleAType = typeof(ModuleAModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = moduleAType.Name,
+                ModuleType = moduleAType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.OnDemand
+            });
         }
     }
 }

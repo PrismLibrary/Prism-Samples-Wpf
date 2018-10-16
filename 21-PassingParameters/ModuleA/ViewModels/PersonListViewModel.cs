@@ -20,7 +20,7 @@ namespace ModuleA.ViewModels
 
         public DelegateCommand<Person> PersonSelectedCommand { get; private set; }
 
-        public PersonListViewModel(RegionManager regionManager)
+        public PersonListViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 
