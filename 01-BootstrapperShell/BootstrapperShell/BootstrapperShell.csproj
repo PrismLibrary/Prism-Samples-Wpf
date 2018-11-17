@@ -1,21 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>BootstrapperShell</AssemblyName>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" />
-    <Page Include="Views\MainWindow.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="7.2.0.639-ci" />
   </ItemGroup>
-
 </Project>

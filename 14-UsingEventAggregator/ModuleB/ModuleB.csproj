@@ -1,23 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>ModuleB</AssemblyName>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Page Include="Views\MessageList.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.639-ci" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\UsingEventAggregator.Core\UsingEventAggregator.Core.csproj" />
   </ItemGroup>
-
 </Project>
