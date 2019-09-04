@@ -94,17 +94,8 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Prism.Unity">
       <Version>7.2.0.1367</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.3</Version>
-    </PackageReference>
-    <PackageReference Include="Unity.Container">
-      <Version>5.11.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

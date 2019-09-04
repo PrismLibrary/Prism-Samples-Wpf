@@ -82,11 +82,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Wpf">
-      <Version>7.2.0.1367</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\ViewA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +90,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity">
+      <Version>7.2.0.1367</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
