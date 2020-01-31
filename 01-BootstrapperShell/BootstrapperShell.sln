@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootstrapperShell", "BootstrapperShell\BootstrapperShell.csproj", "{F971D5DF-CE41-4CF8-96AD-091CAC6CAF04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootstrapperShell", "src\BootstrapperShell\BootstrapperShell.csproj", "{F971D5DF-CE41-4CF8-96AD-091CAC6CAF04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
