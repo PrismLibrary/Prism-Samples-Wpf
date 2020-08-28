@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <PrismVersion>7.2.0.1422</PrismVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Core" Version="$(PrismVersion)" />
+    <PackageReference Include="Prism.Wpf" Version="$(PrismVersion)" />
+    <PackageReference Update="Prism.DryIoc" Version="$(PrismVersion)" />
+    <PackageReference Update="Prism.Unity" Version="$(PrismVersion)" />
+  </ItemGroup>
+
+</Project>
