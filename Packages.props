@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.Core" Version="$(PrismVersion)" />
-    <PackageReference Include="Prism.Wpf" Version="$(PrismVersion)" />
+    <PackageReference Update="Prism.Core" Version="$(PrismVersion)" />
+    <PackageReference Update="Prism.Wpf" Version="$(PrismVersion)" />
     <PackageReference Update="Prism.DryIoc" Version="$(PrismVersion)" />
     <PackageReference Update="Prism.Unity" Version="$(PrismVersion)" />
   </ItemGroup>
