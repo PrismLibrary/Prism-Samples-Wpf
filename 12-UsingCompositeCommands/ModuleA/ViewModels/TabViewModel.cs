@@ -43,7 +43,7 @@ namespace ModuleA.ViewModels
 
         private void Update()
         {
-            UpdateText = $"Updated: {DateTime.Now}";
+            UpdateText = $"Updated By {nameof(TabViewModel)}: {DateTime.Now}";
         }       
     }
 }

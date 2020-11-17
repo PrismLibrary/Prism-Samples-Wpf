@@ -14,11 +14,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Button Content="Save" Margin="10" Command="{Binding ApplicationCommands.SaveCommand}"/>
-
-        <TabControl Grid.Row="1" Margin="10" prism:RegionManager.RegionName="ContentRegion" />
+        <TextBlock Grid.Row="1" Text ="{Binding Title}" Margin="10"/>
+        <TabControl Grid.Row="2" Margin="10" prism:RegionManager.RegionName="ContentRegion" />
     </Grid>
 </Window>
