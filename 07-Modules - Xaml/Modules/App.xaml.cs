@@ -24,7 +24,7 @@ namespace Modules
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            return ModuleCatalog.CreateFromXaml(new Uri("/Modules;component/ModuleCatalog.xaml", UriKind.Relative));
+            return new XamlModuleCatalog(new Uri("/Modules;component/ModuleCatalog.xaml", UriKind.Relative));
         }
     }
 }
