@@ -1,5 +1,6 @@
 ﻿using Prism.Ioc;
 using System.Windows;
+using UsingDialogService.ViewModels;
 using UsingDialogService.Views;
 
 namespace UsingDialogService
@@ -16,7 +17,7 @@ namespace UsingDialogService
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
         }
     }
 }
