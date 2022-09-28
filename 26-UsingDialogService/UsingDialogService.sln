@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32519.111
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingDialogService", "UsingDialogService\UsingDialogService.csproj", "{3079D49C-9902-45B3-B476-A05DAF906EEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3079D49C-9902-45B3-B476-A05DAF906EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3079D49C-9902-45B3-B476-A05DAF906EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3079D49C-9902-45B3-B476-A05DAF906EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3079D49C-9902-45B3-B476-A05DAF906EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A21D0F8D-5538-4E74-A4D3-1B948C1CAD81}
+	EndGlobalSection
+EndGlobal

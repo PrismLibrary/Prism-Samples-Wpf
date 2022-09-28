@@ -167,6 +167,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavigationJournal", "24-Nav
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingInvokeCommandAction", "29-InvokeCommandAction\UsingInvokeCommandAction\UsingInvokeCommandAction.csproj", "{F6FB8B37-4326-4E12-9665-77D2B299EC72}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "26-UsingDialogService", "26-UsingDialogService", "{6E327AF8-1D7E-450B-B59C-784148AE85FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingDialogService", "26-UsingDialogService\UsingDialogService\UsingDialogService.csproj", "{7B8C9D9A-6130-4943-9353-77F27CD2F160}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -385,6 +389,10 @@ Global
 		{F6FB8B37-4326-4E12-9665-77D2B299EC72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6FB8B37-4326-4E12-9665-77D2B299EC72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6FB8B37-4326-4E12-9665-77D2B299EC72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8C9D9A-6130-4943-9353-77F27CD2F160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8C9D9A-6130-4943-9353-77F27CD2F160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8C9D9A-6130-4943-9353-77F27CD2F160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8C9D9A-6130-4943-9353-77F27CD2F160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -443,6 +451,7 @@ Global
 		{40E76136-2E83-4562-BB67-CB127B6428D0} = {DAAD6831-29DD-41BC-A84B-90821D34C1DD}
 		{BF1426E0-1D30-4B40-B43D-29E134074C26} = {DAAD6831-29DD-41BC-A84B-90821D34C1DD}
 		{F6FB8B37-4326-4E12-9665-77D2B299EC72} = {64E6ED54-B27A-4437-AE69-9C2342D9543D}
+		{7B8C9D9A-6130-4943-9353-77F27CD2F160} = {6E327AF8-1D7E-450B-B59C-784148AE85FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E9EF679-354A-486B-8383-2AD4D2D972AB}
