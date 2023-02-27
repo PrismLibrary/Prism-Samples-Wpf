@@ -1,4 +1,5 @@
 ﻿using Prism.Ioc;
+using StylingDialog.ViewModels;
 using StylingDialog.Views;
 using System.Windows;
 
@@ -16,7 +17,7 @@ namespace StylingDialog
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
         }
     }
 }
