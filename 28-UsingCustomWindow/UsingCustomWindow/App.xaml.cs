@@ -17,6 +17,7 @@ namespace UsingCustomWindow
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialogWindow<MyCustomWindow>();
             containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
         }
     }
