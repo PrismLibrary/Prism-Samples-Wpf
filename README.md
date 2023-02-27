@@ -31,6 +31,7 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
  [Controlling View lifetime][26] | Automatically remove views from memory with IRegionMemberLifetime 
  [Navigation Journal][27] | Learn how to use the Navigation Journal 
  [Dialog Service][29] | Learn how to use the Dialog Service
+ [Styling Dialog][30] | Learn how to style the dialog
  [Interactivity - InvokeCommandAction][32] | Invoke commands in response to any event 
 
 
@@ -62,4 +63,5 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
 [26]: 23-RegionMemberLifetime/
 [27]: 24-NavigationJournal/
 [29]: 26-UsingDialogService/
+[30]: 27-StylingDialog/
 [32]: 29-InvokeCommandAction/
