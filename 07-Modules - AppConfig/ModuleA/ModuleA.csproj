@@ -7,8 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" />
   </ItemGroup>
-  <PropertyGroup>
-    <!--<PostBuildEvent>xcopy "$(TargetDir)*.*" "$(SolutionDir)\$(SolutionName)\$(OutDir)" /Y</PostBuildEvent>-->
-    <PostBuildEvent>xcopy "$(TargetDir)*.*" "$(SolutionDir)\$(SolutionName)\bin\Debug\net6.0-windows\" /Y</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)\$(SolutionName)\bin\Debug\net6.0-windows\&quot; /Y" />
+  </Target>
 </Project>
