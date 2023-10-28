@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <PrismTargetFramework>net6.0-windows</PrismTargetFramework>
+  </PropertyGroup>
+</Project>

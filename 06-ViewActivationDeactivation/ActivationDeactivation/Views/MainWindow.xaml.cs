@@ -1,5 +1,5 @@
 ﻿using Unity;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System.Windows;
 using Prism.Ioc;
 

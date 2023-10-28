@@ -1,7 +1,7 @@
 ﻿using System;
 using ModuleA.Business;
 using Prism.Mvvm;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 
 namespace ModuleA.ViewModels
 {

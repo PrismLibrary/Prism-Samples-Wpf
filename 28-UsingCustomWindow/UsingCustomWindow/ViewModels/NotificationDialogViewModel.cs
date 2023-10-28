@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using Prism.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,7 +27,7 @@ namespace UsingCustomWindow.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public event Action<IDialogResult> RequestClose;
+        public DialogCloseListener RequestClose { get; }
 
         protected virtual void CloseDialog(string parameter)
         {
@@ -43,7 +43,7 @@ namespace UsingCustomWindow.ViewModels
 
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
-            RequestClose?.Invoke(dialogResult);
+            RequestClose.Invoke(dialogResult);
         }
 
         public virtual bool CanCloseDialog()
