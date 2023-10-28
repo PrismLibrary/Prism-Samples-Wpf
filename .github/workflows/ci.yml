@@ -9,6 +9,7 @@ on:
 jobs:
   build-sample:
     strategy:
+      fail-fast: false
       matrix:
         solution-path: [
           '01-BootstrapperShell/BootstrapperShell.sln', 
