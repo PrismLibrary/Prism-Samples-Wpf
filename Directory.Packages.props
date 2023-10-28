@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <PrismVersion>9.0.271-pre</PrismVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Prism.Core" Version="$(PrismVersion)" />
+    <PackageVersion Include="Prism.Wpf" Version="$(PrismVersion)" />
+    <PackageVersion Include="Prism.DryIoc" Version="$(PrismVersion)" />
+    <PackageVersion Include="Prism.Unity" Version="$(PrismVersion)" />
+  </ItemGroup>
+
+</Project>

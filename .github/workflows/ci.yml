@@ -1,0 +1,21 @@
+name: build_wpf_samples
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-sample:
+    strategy:
+      matrix:
+        solution-path: [
+          '01-BootstrapperShell/BootstrapperShell.sln', 
+          '02-Regions/Regions.sln', 
+          '03-CustomRegions/Regions.sln'
+        ]
+    uses: avantipoint/workflow-templates/.github/workflows/dotnet-build.yml@master
+    with:
+      name: Build Bootstrapper Shell
+      solution-path: ${{ matrix.solution-path }}
