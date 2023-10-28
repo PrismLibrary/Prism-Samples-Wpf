@@ -13,9 +13,38 @@ jobs:
         solution-path: [
           '01-BootstrapperShell/BootstrapperShell.sln', 
           '02-Regions/Regions.sln', 
-          '03-CustomRegions/Regions.sln'
+          '03-CustomRegions/Regions.sln',
+          '04-ViewDiscovery/ViewDiscovery.sln',
+          '05-ViewInjection/ViewInjection.sln',
+          '06-ViewActivationDeactivation/ActivationDeactivation.sln',
+          '07-Modules - AppConfig/Modules.sln',
+          '07-Modules - Code/Modules.sln',
+          '07-Modules - Directory/Modules.sln',
+          '07-Modules - LoadManual/Modules.sln',
+          '07-Modules - Xaml/Modules.sln',
+          '08-ViewModelLocator/ViewModelLocator.sln',
+          '09-ChangeConvention/ViewModelLocator.sln',
+          '10-CustomRegistrations/ViewModelLocator.sln',
+          '11-UsingDelegateCommands/UsingDelegateCommands.sln',
+          '12-UsingCompositeCommands/UsingCompositeCommands.sln',
+          '13-IActiveAwareCommands/UsingCompositeCommands.sln',
+          '14-UsingEventAggregator/UsingEventAggregator.sln',
+          '15-FilteringEvents/UsingEventAggregator.sln',
+          '16-RegionContext/RegionContext.sln',
+          '17-BasicRegionNavigation/BasicRegionNavigation.sln',
+          '18-NavigationCallback/BasicRegionNavigation.sln',
+          '19-NavigationParticipation/NavigationParticipation.sln',
+          '20-NavvigateToExistingViews/NavigationParticipation.sln',
+          '21-PassingParameters/PassingParameters.sln',
+          '22-ConfirmCancelNavigation/ConfirmCancelNavigation.sln',
+          '23-RegionMemeberLifetime/RegionMemberLifetime.sln',
+          '24-NavigationJournal/NavigationJournal.sln',
+          '26-UsingDialogService/UsingDialogService.sln',
+          '27-StylingDialog/StylingDialog.sln',
+          '28-UsingCustomWindow/UsingCustomWindow.sln',
+          '29-InvokeCommandAction/InvokeCommandAction.sln',
         ]
     uses: avantipoint/workflow-templates/.github/workflows/dotnet-build.yml@master
     with:
-      name: Build Bootstrapper Shell
+      name: Build Sample
       solution-path: ${{ matrix.solution-path }}
