@@ -49,3 +49,4 @@ jobs:
     with:
       name: Build Sample
       solution-path: ${{ matrix.solution-path }}
+      dotnet-version: 6.0.x

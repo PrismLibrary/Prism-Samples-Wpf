@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>$(PrismTargetFramework)</TargetFramework>
     <AssemblyName>ModuleA</AssemblyName>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
@@ -8,6 +8,6 @@
     <PackageReference Include="Prism.Wpf" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)\$(SolutionName)\bin\Debug\net6.0-windows\&quot; /Y" />
+    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)\$(SolutionName)\bin\Debug\$(PrismTargetFramework)\&quot; /Y" />
   </Target>
 </Project>
