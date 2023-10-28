@@ -1,5 +1,5 @@
 ﻿using Prism.Ioc;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System.Windows;
 
 namespace ViewInjection.Views
