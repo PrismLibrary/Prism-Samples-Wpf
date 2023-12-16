@@ -42,10 +42,10 @@ Samples that demonstrate how to use various Prism features with WPF.  If you are
 [4]: 04-ViewDiscovery/
 [5]: 05-ViewInjection/
 [6]: 06-ViewActivationDeactivation/
-[7]: 07-Modules%20-%20AppConfig/
-[8]: 07-Modules%20-%20Code/
-[9]: 07-Modules%20-%20Directory/
-[10]: 07-Modules%20-%20LoadManual/
+[7]: 07-Modules-AppConfig/
+[8]: 07-Modules-Code/
+[9]: 07-Modules-Directory/
+[10]: 07-Modules-LoadManual/
 [11]: 08-ViewModelLocator/
 [12]: 09-ChangeConvention/
 [13]: 10-CustomRegistrations/
