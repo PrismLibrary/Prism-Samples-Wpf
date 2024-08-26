@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <PrismVersion>9.0.271-pre</PrismVersion>
+    <PrismVersion>9.0.537</PrismVersion>
   </PropertyGroup>
 
   <ItemGroup>
